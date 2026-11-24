@@ -5,14 +5,14 @@ const PV={piel:['Piel dura','🧱','-8% daño recibido',P=>P.red*=.92],meta:['Me
 let S='menu',P=null,E=[],B=[],EB=[],G=[],FX=[],CH=[],NC=0,RIn=0,T=0,K=0,sp=0,gain=0,jx=0,jy=0,jo=null;
 const WS={shot:0,gren:0,tesla:0,mini:0,molo:0,flame:0,snipe:0,storm:0,pulse:0,lanza:0},CD={shot:0,gren:0,tesla:0,mini:0,molo:0,flame:0,snipe:0,storm:0,pulse:0,lanza:0},keys={w:0,a:0,s:0,d:0};
 const KM={KeyW:'w',KeyA:'a',KeyS:'s',KeyD:'d',ArrowUp:'w',ArrowLeft:'a',ArrowDown:'s',ArrowRight:'d'};
-addEventListener('keydown',e=>{const k=KM[e.code];if(k){keys[k]=1;if(S==='play')e.preventDefault()}});
+addEventListener('keydown',e=>{const k=KM[e.code];if(k){INP.touch=false;keys[k]=1;if(S==='play')e.preventDefault()}});
 addEventListener('keyup',e=>{const k=KM[e.code];if(k)keys[k]=0});
 addEventListener('blur',()=>{keys.w=keys.a=keys.s=keys.d=0;jo=null;jx=jy=0});
 /* Atajos de teclado: 1/2/3 eligen carta (nivel/cofre), Enter confirma el botón principal */
 addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
  if(S==='lvl'&&/^[1-3]$/.test(e.key)){const b=U.querySelectorAll('button.card')[+e.key-1];if(b){e.preventDefault();b.click()}}
  else if(S==='dead'&&e.key==='Enter'){const b=document.getElementById('bk');if(b){e.preventDefault();b.click()}}});
-addEventListener('pointerdown',e=>{jo={x:e.clientX,y:e.clientY}});
+addEventListener('pointerdown',e=>{INP.touch=e.pointerType!=='mouse';if(e.pointerType==='mouse')return;jo={x:e.clientX,y:e.clientY}});
 addEventListener('pointermove',e=>{if(!jo)return;jx=Math.max(-1,Math.min(1,(e.clientX-jo.x)/50));jy=Math.max(-1,Math.min(1,(e.clientY-jo.y)/50))});
 const up=()=>{jo=null;jx=jy=0};addEventListener('pointerup',up);addEventListener('pointercancel',up);
 
