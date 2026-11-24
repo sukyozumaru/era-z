@@ -1,5 +1,5 @@
 function spawn(){
- if(E.length>=320)return;
+ if(E.length>=LIM.enemies)return;
  const a=Math.random()*6.283,d=Math.max(W,H)/2+60+Math.random()*320,r=Math.random();
  const e={x:P.x+Math.cos(a)*d,y:P.y+Math.sin(a)*d,c:0,a:0};
  Object.assign(e,pickE());
@@ -16,9 +16,9 @@ function step(dt){
  let dx=jx+keys.d-keys.a,dy=jy+keys.s-keys.w,l=Math.hypot(dx,dy);if(l>1){dx/=l;dy/=l}
  if(l>.1)P.a=Math.atan2(dy,dx);P.mv=l>.1;if(Math.abs(dx)>.1)P.f=dx>0?1:-1;
  P.x+=dx*P.spd*(P.slv?.78:1)*dt;P.y+=dy*P.spd*(P.slv?.78:1)*dt;P.sl=0;hitObs(P,9);P.slv=P.sl;if(P.dsh>0){P.x+=Math.cos(P.da)*560*dt;P.y+=Math.sin(P.da)*560*dt;hitObs(P,9);if(P.hs)for(const e of E){if(e.dead||P.hs.has(e))continue;if(Math.hypot(e.x-P.x,e.y-P.y)<e.r+46){P.hs.add(e);hit(e,P.dmg*4+25);snd(900,.07,'square',.07,.4);spark3(e.x,hH(e.x,e.y)+22,e.y,10,['#ffffff','#ff4040','#cfe8ff'],200,.3,300)}}}P.hp=Math.min(P.mhp,P.hp+P.reg*dt);world(dt);
- sp-=dt;if(sp<=0&&E.length<230){sp=Math.max(.08,.6-T*.004);for(let i=0,n=2+(T/30|0)+MD.x;i<n;i++)spawn()}
+ sp-=dt;if(sp<=0&&E.length<LIM.wave){sp=Math.max(.08,.6-T*.004);for(let i=0,n=2+(T/30|0)+MD.x;i<n;i++)spawn()}
  if(T>=NC&&CH.length<2){const a=Math.random()*6.283,d=420+Math.random()*600;CH.push({x:P.x+Math.cos(a)*d,y:P.y+Math.sin(a)*d});NC=T+80}
- for(const e of E){e.a=Math.atan2(P.y-e.y,P.x-e.x);const pd=Math.hypot(P.x-e.x,P.y-e.y),mvf=(e.k==='spit'&&pd<230)?0:1;e.x+=Math.cos(e.a)*e.sp*.66*dt*mvf;e.y+=Math.sin(e.a)*e.sp*.66*dt*mvf;if(e.k==='spit'){e.fc=(e.fc===undefined?Math.random()*2:e.fc)-dt;if(e.fc<=0&&pd<420){e.fc=2.4;EB.push({x:e.x,y:e.y,vx:Math.cos(e.a)*230,vy:Math.sin(e.a)*230,l:2.2,d:e.dm,col:'#9bff4a'})}}if(e.el&&Math.random()<.1)spark3(e.x,hH(e.x,e.y)+34,e.y,1,['#ffb800'],25,.5,0);if(e.k!=='pte')hitObs(e,e.r*.6);if(e.kx||e.ky){e.x+=e.kx*dt;e.y+=e.ky*dt;const f=Math.pow(.02,dt);e.kx*=f;e.ky*=f}e.c-=dt;if(Math.hypot(P.x-e.x,P.y-e.y)<e.r+10){P.hp-=(P.bf>0||P.iv>0)?0:e.dm*dt*P.red;if(P.th)hit(e,P.th*dt);if(T-lh>.4){lh=T;sfx.hurt();HF=.4;try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}}}}
+ for(const e of E){e.a=Math.atan2(P.y-e.y,P.x-e.x);const pd=Math.hypot(P.x-e.x,P.y-e.y),mvf=(e.k==='spit'&&pd<230)?0:1;e.x+=Math.cos(e.a)*e.sp*.66*dt*mvf;e.y+=Math.sin(e.a)*e.sp*.66*dt*mvf;if(e.k==='spit'){e.fc=(e.fc===undefined?Math.random()*2:e.fc)-dt;if(e.fc<=0&&pd<420&&EB.length<LIM.eb){e.fc=2.4;EB.push({x:e.x,y:e.y,vx:Math.cos(e.a)*230,vy:Math.sin(e.a)*230,l:2.2,d:e.dm,col:'#9bff4a'})}}if(e.el&&Math.random()<.1)spark3(e.x,hH(e.x,e.y)+34,e.y,1,['#ffb800'],25,.5,0);if(e.k!=='pte')hitObs(e,e.r*.6);if(e.kx||e.ky){e.x+=e.kx*dt;e.y+=e.ky*dt;const f=Math.pow(.02,dt);e.kx*=f;e.ky*=f}e.c-=dt;if(Math.hypot(P.x-e.x,P.y-e.y)<e.r+10){P.hp-=(P.bf>0||P.iv>0)?0:e.dm*dt*P.red;if(P.th)hit(e,P.th*dt);if(T-lh>.4){lh=T;sfx.hurt();HF=.4;buzz(25)}}}
  for(let i=0;i<E.length;i++){const a=E[i];for(let j=i+1;j<E.length;j++){const b=E[j],dx=a.x-b.x,dy=a.y-b.y,m=(a.r+b.r)*.8;if(dx>m||dx<-m||dy>m||dy<-m)continue;const d=Math.hypot(dx,dy)||1;if(d<m){const p=(m-d)*.5/d;a.x+=dx*p;a.y+=dy*p;b.x-=dx*p;b.y-=dy*p}}}
  P.cd-=dt;for(const k in CD)CD[k]-=dt;
  if(P.cd<=0){const t=near(420);if(t){P.cd=1/P.rate;const a=Math.atan2(t.y-P.y,t.x-P.x);P.a=a;P.f=Math.cos(a)>=0?1:-1;for(let i=0;i<P.proj;i++)shoot(a+(i-(P.proj-1)/2)*.18,460,1.1,P.dmg,'#ffe27a');sfx.shot()}}
@@ -45,6 +45,9 @@ function step(dt){
  E=E.filter(e=>!e.dead);
  for(const g of G){const d=Math.hypot(P.x-g.x,P.y-g.y)||1;if(d<P.mag||g.m){g.m=1;g.x+=(P.x-g.x)/d*340*dt;g.y+=(P.y-g.y)/d*340*dt}if(d<14){g.d=1;P.xp+=g.v*P.xpm;sfx.gem()}}
  G=G.filter(g=>!g.d);
+ if(G.length>LIM.gems){const ex=G.splice(0,G.length-LIM.gems);let v=0;for(const g of ex)v+=g.v;G[G.length-1].v+=v}
+ if(FX.length>LIM.fx)FX.splice(0,FX.length-LIM.fx);
+ if(CPS.length>LIM.corpses)CPS.splice(0,CPS.length-LIM.corpses);
  if(P.hp<=0){if(P.rev){P.rev=0;P.hp=P.mhp*.5;P.bf=4;toast('¡Revives!',3)}else{die();return}}
  const c=CH.find(c=>Math.hypot(P.x-c.x,P.y-c.y)<28);if(c){CH=CH.filter(x=>x!==c);pick3();return}
  if(WO&&Math.hypot(P.x-WO.x,P.y-WO.y)<64){WO=null;spin('wheel');return}
