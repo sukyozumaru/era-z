@@ -6,6 +6,8 @@ function rs(){const d=Math.min(devicePixelRatio||1,3);W=WR.clientWidth;H=WR.clie
 addEventListener('resize',rs);rs();
 let M={gold:0,d:0,h:0,s:0,x:0,own:{},w:{},found:{},ch:0,co:{0:1},rel:{},eq:[],st:{k:0,bs:0,mg:0,ob:0,pt:0,rl:0,runs:0,bt:0,win:{}},mc:{},set:{mv:.5,sv:.8,q:1,r:1,d:1,p:1,sh:1,z:1}};
 try{Object.assign(M,JSON.parse(localStorage.getItem('arcane1')||'{}'))}catch(e){}
+/* Migración de ajustes: completa claves nuevas sin perder las guardadas. cm (movimiento de cámara) hereda el antiguo 'Temblor de cámara = No'. */
+{const o=M.set||{};M.set=Object.assign({mv:.5,sv:.8,q:1,r:1,d:1,p:1,sh:1,z:1,rf:0,cm:o.sh===0?2:0},o)}
 const save=()=>{try{localStorage.setItem('arcane1',JSON.stringify(M))}catch(e){}};
 const cost=k=>Math.round(8*Math.pow(1.7,M[k]));
 function pix(c){const x=c.getContext('2d'),w=c.width,h=c.height,d=x.getImageData(0,0,w,h),a=d.data,al=new Uint8Array(w*h);
