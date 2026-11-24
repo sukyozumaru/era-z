@@ -12,4 +12,4 @@ for(const o of OB)if(Math.hypot(P.x-o.x,P.y-o.y)<22){o.d=1;orbFx(o.r)}OB=OB.filt
 for(const r of RP)if(Math.hypot(P.x-r.x,P.y-r.y)<24){r.d=1;getRel(r.i)}RP=RP.filter(r=>!r.d);
 for(const o of OBL){if(Math.hypot(P.x-o.x,P.y-o.y)<70)o.c+=dt;else o.c=Math.max(0,o.c-dt);if(o.c>=4){o.d=1;M.st.ob++;toast('¡Obelisco activado!',3);P.xp+=P.need;getRel(pickRel(2));drop(1,o.x,o.y)}}OBL=OBL.filter(o=>!o.d);
 for(const p of PT){if(p.t<0){if(Math.hypot(P.x-p.x,P.y-p.y)<34){p.t=20;toast('¡Portal abierto! Sobrevive 20 s',2)}}else{p.t-=dt;p.s=(p.s||0)-dt;if(p.s<=0){p.s=.18;for(let i=0;i<3;i++)spawn()}if(p.t<=0){p.d=1;M.st.pt++;toast('¡Portal cerrado! Recompensa',3);drop(2,p.x,p.y);getRel(pickRel(1));BG+=15}}}PT=PT.filter(p=>!p.d);
-for(const e of E)if(e.boss){e.bt-=dt;if(e.bt<=0){e.bt=7;for(let i=0;i<6;i++)spawn()}}}
+for(const e of E)if(e.boss&&!e.king){e.bt-=dt;if(e.bt<=0){e.bt=7;for(let i=0;i<6;i++)spawn()}}}
