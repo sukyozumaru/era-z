@@ -31,7 +31,7 @@ El proyecto es estático y usa rutas relativas (`css/…`, `js/…`), así que f
 - `docs/`: plan técnico, informes por etapa y decisiones. `docs/archive/` conserva la maqueta original.
 
 ## Versionado de recursos
-Los `<script>` y `<link>` locales de `index.html` llevan `?v=<versión>` (ahora `0.1.0-alpha.2`). **Hay que cambiarlo en cada publicación**: GitHub Pages cachea los archivos unos minutos y, al ser varios scripts, un visitante podría mezclar archivos viejos y nuevos y romper el juego.
+Los `<script>` y `<link>` locales de `index.html` llevan `?v=<versión>` (ahora `0.2.0-etapa1`). **Hay que cambiarlo en cada publicación**: GitHub Pages cachea los archivos unos minutos y, al ser varios scripts, un visitante podría mezclar archivos viejos y nuevos y romper el juego.
 
 ## Partidas guardadas
 Se guardan en `localStorage['arcane1']`. Esa clave no debe cambiar. Los campos nuevos se completan con valores por defecto al cargar.
