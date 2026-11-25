@@ -31,7 +31,7 @@ const ST={ver:'0.1.0-alpha.2+analytics',key:'erazStats',max:30,run:null,hits:new
    r.perf.push({t:Math.round(T),enemigos:E.length,balas:B.length,acido:EB.length,gemas:G.length,fx:FX.length,particulas:PA.length,llamadas:(R3&&R3.info)?R3.info.render.calls:0,fps:s?s.fps:null,p95:s?s.p95Ms:null})}},
  end(res){const r=this.run;if(!r||r.res)return null;r.res=res;r.t=+T.toFixed(1);r.lvl=P?P.lvl:0;r.bajas=K;r.xp=this.xpTotal();r.monedas=res==='reinicio'?0:gain;r.cofres=RIn;
   r.muerte=res==='muerte'?{causa:r.last||'?',minuto:+(T/60).toFixed(2)}:null;
-  if(!this.simMode){try{const a=JSON.parse(localStorage.getItem(this.key)||'[]');a.push(r);while(a.length>this.max)a.shift();localStorage.setItem(this.key,JSON.stringify(a))}catch(e){}}
+  if(!r.sim){try{const a=JSON.parse(localStorage.getItem(this.key)||'[]');a.push(r);while(a.length>this.max)a.shift();localStorage.setItem(this.key,JSON.stringify(a))}catch(e){}}
   return r},
  summary(r=this.run){if(!r)return null;const tt=Math.max(1,r.t||T),tot=Object.values(r.w).reduce((a,w)=>a+w.eff,0)||1,inn=Object.values(r.hurt).reduce((a,b)=>a+b,0);
   return{semilla:r.seed,sim:r.sim,personaje:r.ch,modo:r.mode,resultado:r.res,tiempo:r.t,nivel:r.lvl,bajas:r.bajas,xp:r.xp,monedas:r.monedas,dps:+(tot/tt).toFixed(1),danoRecibido:Math.round(inn),muerte:r.muerte,
