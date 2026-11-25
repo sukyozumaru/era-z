@@ -1,5 +1,7 @@
 # Era Z
 
+Creado originalmente por [Rencorosito](https://github.com/Rencorosito), con la colaboración de [sukyozumaru](https://github.com/sukyozumaru).
+
 Roguelike de supervivencia estilo *Vampire Survivors* con estética voxel 3D. Puesto 7, año 2089: un obelisco abrió portales al pasado y los muertos se levantaron junto a bestias prehistóricas.
 
 Todo el arte es procedural (código) y el audio se genera con WebAudio. No hay imágenes ni sonidos externos.
