@@ -27,7 +27,7 @@ function behave(e,pd,dt){
 function step(dt){
  T+=dt;
  let dx=jx+keys.d-keys.a,dy=jy+keys.s-keys.w,l=Math.hypot(dx,dy);if(l>1){dx/=l;dy/=l}
- if(l>.1)P.a=Math.atan2(dy,dx);P.mv=l>.1;if(Math.abs(dx)>.1)P.f=dx>0?1:-1;
+ if(l>.1){P.a=Math.atan2(dy,dx);P.ma=P.a}P.mv=l>.1;if(Math.abs(dx)>.1)P.f=dx>0?1:-1;
  P.x+=dx*P.spd*(P.slv?.78:1)*dt;P.y+=dy*P.spd*(P.slv?.78:1)*dt;P.sl=0;hitObs(P,9);P.slv=P.sl;if(P.dsh>0){spark3(P.x,hH(P.x,P.y)+12,P.y,3,['#ffffff','#99ccff'],30,.35,0);P.x+=Math.cos(P.da)*560*dt;P.y+=Math.sin(P.da)*560*dt;hitObs(P,9);if(P.hs)for(const e of E){if(e.dead||P.hs.has(e))continue;if(Math.hypot(e.x-P.x,e.y-P.y)<e.r+46){P.hs.add(e);hit(e,P.dmg*4+25);snd(900,.07,'square',.07,.4);spark3(e.x,hH(e.x,e.y)+22,e.y,10,['#ffffff','#ff4040','#cfe8ff'],200,.3,300)}}}P.hp=Math.min(P.mhp,P.hp+P.reg*dt);world(dt);kingTick(dt);
  sp-=dt;if(sp<=0&&E.length<LIM.wave){sp=Math.max(.08,.6-T*.004);for(let i=0,n=2+(T/30|0)+MD.x;i<n;i++)spawn()}
  if(T>=NC&&CH.length<2){const a=Math.random()*6.283,d=420+Math.random()*600;CH.push({x:P.x+Math.cos(a)*d,y:P.y+Math.sin(a)*d});NC=T+80}
