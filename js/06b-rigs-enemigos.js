@@ -15,7 +15,7 @@ function rigSpit(){
 function rigBom(){
  const g=new TH.Group(),skin='#d9a05a',belly='#d98a3a';
  const b=sp_(11,belly,1.05,1,1.05);b.position.set(0,20,0);g.add(b);
- for(let i=0;i<8;i++){const a=i*2.4,r=1.6+(i%3)*.7,bs=new TH.Mesh(SPG,mat('#fff0a0'));bs.scale.setScalar(r);bs.position.set(Math.cos(a)*10.4,20+Math.sin(i*1.7)*7.5,Math.sin(a)*10.4);g.add(bs)}
+ for(let i=0;i<8;i++){const a=i*2.4,r=1.6+(i%3)*.7,bs=new TH.Mesh(SPGx(),mat('#fff0a0'));bs.scale.setScalar(r);bs.position.set(Math.cos(a)*10.4,20+Math.sin(i*1.7)*7.5,Math.sin(a)*10.4);g.add(bs)}
  const hd=sp_(4,skin,1,1,1);hd.position.set(8,32,0);g.add(hd);eye(g,11.6,32.6,-1.8,.8);eye(g,11.6,32.6,1.8,.8);
  const lg=[-4,4].map(z=>{const l=cp(2.8,5,'#5a3a1a');l.position.y=-3;const f=sp_(3.4,'#161210',1.5,.7,1);f.position.set(1.5,-8,0);const p=piv(0,9,z,l,f);g.add(p);return p});
  const ar=[-10,10].map(z=>{const a=cp(2,6,skin);a.position.y=-4;const p=piv(0,24,z,a);p.rotation.z=.5;g.add(p);return p});

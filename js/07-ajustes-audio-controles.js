@@ -1,6 +1,7 @@
+let DYN=null;/* resolución dinámica: nivel temporal de RSV (null = el del ajuste del jugador). Solo visual, nunca se guarda. */
 const RSV=[.35,.5,.75,1],SO={q:['Baja','Media','Alta'],r:['Muy pixelada','Pixelada','Suave','Nítida'],d:['Corta','Media','Larga'],p:['Pocas','Normales','Muchas'],rf:['No','Sí'],cm:['Normal','Reducido','Sin temblor'],z:['Cerca','Normal','Lejos']},SL={q:'Calidad de modelos',r:'Resolución',d:'Distancia de visión',p:'Partículas',rf:'Reducir efectos',cm:'Movimiento de cámara',z:'Cámara'};
 const SB=()=>AC.sb||(AC.sb=(()=>{const g=AC.createGain();g.gain.value=M.set.sv;g.connect(AC.destination);return g})()),MBg=()=>AC.mb||(AC.mb=(()=>{const g=AC.createGain();g.gain.value=M.set.mv*.5;g.connect(AC.destination);return g})());
-function applyG(){const s=M.set;if(R3){R3.setPixelRatio(RSV[s.r]);R3.setSize(W,H);SCN.fog.near=[300,600,900][s.d];SCN.fog.far=[1000,1900,2800][s.d];SHM.opacity=s.q?.4:0}if(AC){MBg().gain.value=s.mv*.5;SB().gain.value=s.sv}}
+function applyG(){const s=M.set;if(R3){R3.setPixelRatio(RSV[DYN!=null?DYN:s.r]);R3.setSize(W,H);SCN.fog.near=[300,600,900][s.d];SCN.fog.far=[1000,1900,2800][s.d];SHM.opacity=s.q?.4:0}if(AC){MBg().gain.value=s.mv*.5;SB().gain.value=s.sv}}
 /* Dirección del dash (ERAZ-001): la del movimiento actual (joystick o teclado); si estás quieto, la última dirección de movimiento; si nunca te moviste, hacia donde miras. */
 function dashAngle(){const dx=jx+keys.d-keys.a,dy=jy+keys.s-keys.w;return Math.hypot(dx,dy)>.1?Math.atan2(dy,dx):(P.ma!==undefined?P.ma:P.a)}
 function dash(){if(S!=='play'||P.dc>0)return;P.dc=3;P.dsh=.2;P.iv=.4;P.da=dashAngle();snd(420,.18,'sawtooth',.07,2.4);spark3(P.x,hH(P.x,P.y)+10,P.y,14,['#ffffff','#99ccff'],140,.3,60)}
@@ -18,7 +19,7 @@ setInterval(mTick,50);
 const AS=Array.from({length:40},()=>({x:Math.random(),y:Math.random(),s:Math.random()*.04+.01,r:Math.random()*1.6+.5}));
 let AC=null,lh=0,gk=0,gg=0;
 const snd=(f,d=.1,t='square',v=.05,s=0)=>{if(!AC||M.mute)return;const n=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.setValueAtTime(f,n);if(s)o.frequency.exponentialRampToValueAtTime(Math.max(30,f*s),n+d);g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(SB());o.start(n);o.stop(n+d)};
-addEventListener('pointerdown',()=>{if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume()});
+addEventListener('pointerdown',()=>{if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state!=='running'){try{AC.resume().catch(()=>{})}catch(e){}}});
 const sfx={shot:()=>snd(520,.07,'square',.03,.5),boom:()=>snd(120,.35,'sawtooth',.12,.3),zap:()=>snd(900,.15,'sawtooth',.05,.3),
 kill:()=>{const t=performance.now();if(t-gk>70){gk=t;snd(200,.08,'triangle',.05,.5)}},gem:()=>{const t=performance.now();if(t-gg>50){gg=t;snd(900,.06,'sine',.04,1.6)}},
 hurt:()=>snd(90,.12,'sawtooth',.06,.6),lvl:()=>[523,659,784].forEach((f,i)=>setTimeout(()=>snd(f,.18,'triangle',.07),i*90)),tick:()=>snd(700,.04,'square',.04),

@@ -15,7 +15,12 @@ addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)retur
 /* Entrada táctil (ERAZ-001): cada dedo se gestiona por pointerId. El primer toque fuera de botones y paneles es el joystick;
    DASH y pausa reaccionan a su propio pointerdown y no tocan el estado del joystick. El ratón nunca crea joystick. */
 addEventListener('pointerdown',e=>{INP.touch=e.pointerType!=='mouse';if(e.pointerType==='mouse'||jo)return;if(e.target.closest&&e.target.closest('button,.pn'))return;jo={x:e.clientX,y:e.clientY,id:e.pointerId}});
-addEventListener('pointermove',e=>{if(!jo||e.pointerId!==jo.id)return;jx=Math.max(-1,Math.min(1,(e.clientX-jo.x)/50));jy=Math.max(-1,Math.min(1,(e.clientY-jo.y)/50))});
+/* v0.2.1 · Joystick: radio 50 px, zona muerta del 12 % (sin deriva por temblor del dedo) y el origen sigue al dedo cuando se aleja del radio,
+   de modo que invertir la dirección no obliga a recorrer todo el trayecto de vuelta. La salida es circular (módulo máx. 1). */
+const JR=50,JDZ=.12;
+addEventListener('pointermove',e=>{if(!jo||e.pointerId!==jo.id)return;let dx=e.clientX-jo.x,dy=e.clientY-jo.y;const d=Math.hypot(dx,dy);
+ if(d>JR){const k=(d-JR)/d;jo.x+=dx*k;jo.y+=dy*k;dx=e.clientX-jo.x;dy=e.clientY-jo.y}
+ const dl=Math.hypot(dx,dy),m=Math.min(1,dl/JR);if(m<JDZ||!dl){jx=jy=0;return}const s=(m-JDZ)/(1-JDZ);jx=dx/dl*s;jy=dy/dl*s});
 const up=e=>{if(jo&&e&&e.pointerId!==jo.id)return;jo=null;jx=jy=0};['pointerup','pointercancel','lostpointercapture'].forEach(t=>addEventListener(t,up));
 
 const RC=['#9aa0a6','#4aa3ff','#b56bff','#ffb800'],RN=['Común','Raro','Épico','Legendario'];
