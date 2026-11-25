@@ -14,7 +14,7 @@ function flameTick(l,R,half){const d=P.dmg*FLC.direct(l),bd=P.dmg*FLC.burn(l),bt
  for(const e of E){if(e.dead)continue;const dx=e.x-P.x,dy=e.y-P.y,dist=Math.hypot(dx,dy);if(dist>R+e.r*.6)continue;
   if(angDiff(Math.atan2(dy,dx),FL.a)>half+Math.atan2(e.r*.6,Math.max(dist,1)))continue;
   flameHit(e,d*(e.boss?.7:1));if(!e.dead){e.bn=bt;e.bd=bd*(e.boss?.5:1)}}}
-function flameUpdate(dt){const l=Math.min(5,WS.flame),R=FLC.range(l),half=FLC.half(l),t=near(R+10);
+function flameUpdate(dt){const l=Math.min(5,WS.flame),R=FLC.range(l),half=FLC.half(l);let t=null,bd=1e18;/* distancia al borde del cuerpo: los enemigos grandes (jefes) también activan el arma */for(const e of E){if(e.dead)continue;const d=Math.hypot(e.x-P.x,e.y-P.y)-e.r*.6;if(d<R+10&&d<bd){bd=d;t=e}}
  if(t){FL.hold=.18;FL.a=Math.atan2(t.y-P.y,t.x-P.x)}else FL.hold-=dt;
  FL.on=FL.hold>0;FL.range=R;FL.half=half;FL.l=l;if(!FL.on){FL.acc=0;return}
  P.a=FL.a;P.f=Math.cos(FL.a)>=0?1:-1;
