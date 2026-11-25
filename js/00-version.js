@@ -8,7 +8,7 @@ const VERSIONES={
  publicada:'0.2.1',
  lista:[
   {v:'0.2.1',nombre:'Mobile & Performance',fecha:'2026-11-25',
-   fuente:'Publicación 0.2.1 (fecha pendiente de verificar en el despliegue)',
+   fuente:'Despliegue de GitHub Pages del 25-11-2026 18:35 UTC, commit b7f46ed',
    añadido:['Panel de diagnóstico opcional (tecla F3 o ?debug=1) con FPS, tiempo de fotograma, enemigos, llamadas de dibujo y resolución, y un botón para copiar los datos.'],
    mejorado:['Los enemigos lejanos usan modelos más ligeros y la partida ya no acumula memoria de gráficos al aparecer y caer enemigos.','Joystick táctil con zona muerta: el temblor del dedo ya no mueve al personaje, y el centro del joystick sigue al dedo para cambiar de dirección más rápido.','Al ocultar la pestaña o bloquear el teléfono, la partida se pausa y el audio se suspende. El audio vuelve al tocar la pantalla.','Resolución dinámica en móvil con el perfil Automático: baja la resolución si el juego va lento y la recupera después.'],
    corregido:['Los perfiles gráficos ya no cambian la dificultad: Bajo consumo y el modo táctil automático limitaban enemigos, oleadas y gemas, y ahora usan los mismos límites que el resto.','Con calidad de modelos Baja ya no se dibujan sombras invisibles.'],
