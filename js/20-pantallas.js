@@ -84,14 +84,14 @@ function levelUp(){
  S='lvl';sfx.lvl();const o=pool().map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]).slice(0,3);
  const data=o.map(u=>({ic:`<span class="ic" style="color:var(--c-warn);border-color:var(--c-warn)">${u[2]}</span>`,n:u[0],s:u[3],fx:u[4]||''}));
  U.innerHTML=`<div class="pn wide"><h2>Nivel ${P.lvl} · elige una mejora</h2>${cards(data)}</div>`;
- U.querySelectorAll('.card').forEach((b,i)=>b.onclick=()=>{o[i][1]();S='play';U.innerHTML=''})}
+ U.querySelectorAll('.card').forEach((b,i)=>b.onclick=()=>{ST.pick('nivel',o.map(x=>x[0]),o[i][0]);o[i][1]();S='play';U.innerHTML=''})}
 
 /* ---------- Resultado (derrota, victoria, abandono) ---------- */
 function die(){S='dead';if(!WON)sfx.die();endRun();UI.stack=[];UI.cur=null;UI.show('resultado',{kind:WON?'win':'dead'})}
 function abandonRun(){if(WON){die();return}S='dead';endRun(true);UI.stack=[];UI.cur=null;UI.show('resultado',{kind:'abandon'})}
 UI.def('resultado',p=>{const t={win:'¡Victoria!',dead:'Has caído',abandon:'Partida abandonada'}[p.kind];
- U.innerHTML=`<div class="pn ${p.kind==='dead'?'danger':''}"><h2>${t}</h2><div class="kv"><span>Tiempo</span><span>${fmt(T)}</span><span>Nivel</span><span>${P.lvl}</span><span>Bajas</span><span>${K}</span><span>Cofres y objetos</span><span>${RIn}</span><span>Monedas</span><span style="color:var(--c-warn)">+${gain}</span></div>${p.kind==='abandon'?'<p>Monedas conservadas, sin bonificación de victoria.</p>':''}${UN?`<p>${UN}</p>`:''}<button class="pri" id="rt">${icon('rotate-ccw',22)} Reintentar</button><button id="bk">${icon('house',18)} Menú principal</button></div>`;
- $('rt').onclick=()=>start();$('bk').onclick=()=>UI.home()});
+ U.innerHTML=`<div class="pn ${p.kind==='dead'?'danger':''}"><h2>${t}</h2><div class="kv"><span>Tiempo</span><span>${fmt(T)}</span><span>Nivel</span><span>${P.lvl}</span><span>Bajas</span><span>${K}</span><span>Cofres y objetos</span><span>${RIn}</span><span>Monedas</span><span style="color:var(--c-warn)">+${gain}</span></div>${p.kind==='abandon'?'<p>Monedas conservadas, sin bonificación de victoria.</p>':''}${UN?`<p>${UN}</p>`:''}<button class="pri" id="rt">${icon('rotate-ccw',22)} Reintentar</button><button id="bk">${icon('house',18)} Menú principal</button><button class="ghost" id="ex">${icon('download',18)} Exportar estadísticas</button></div>`;
+ $('rt').onclick=()=>start();$('bk').onclick=()=>UI.home();$('ex').onclick=()=>ST.download('json')});
 
 /* Esc: volver atrás en menús (la pausa y los diálogos gestionan Esc por su cuenta) */
 addEventListener('keydown',e=>{if(e.key!=='Escape'||e.repeat||$('dlg-no'))return;const c=UI.cur;if(!c)return;
