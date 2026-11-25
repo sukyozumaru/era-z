@@ -21,10 +21,10 @@ const rarityIc=(e,r)=>`<span class="ic" style="color:${RC[r]};border-color:${RC[
 
 /* ---------- Título y menú principal ---------- */
 function title(){S='menu';UI.stack=[];UI.show('titulo')}
-UI.def('titulo',()=>{U.innerHTML=`<div class="pn" style="text-align:center"><h1>ERA Z</h1><p>Puesto 7 · 2089</p><p class="ver">v${VERSIONES.publicada}</p><button class="pri" id="st">${icon('play',22)} Comenzar</button></div>`;$('st').onclick=()=>{sfx.lvl();UI.home()}},{state:'menu'});
+UI.def('titulo',()=>{U.innerHTML=`<div class="pn" style="text-align:center"><h1>ERA Z</h1><p>Puesto 7 · 2089</p><p class="ver">v${DEV.enabled?DEV.version:(VERSIONES.candidata||VERSIONES.publicada)}</p><button class="pri" id="st">${icon('play',22)} Comenzar</button></div>`;$('st').onclick=()=>{sfx.lvl();UI.home()}},{state:'menu'});
 function lobby(){UI.home()}
 UI.def('principal',()=>{const c=CHR[M.ch],cl=MS.filter((m,i)=>m[1](M.st)>=m[2]&&!M.mc[i]).length;
- U.innerHTML=`<div class="pn"><h2>Puesto 7</h2><div class="chips"><span class="chip">${icon('user',14)}${c[0]}</span><span class="chip">${icon('coins',14)}${M.gold}</span><span class="chip">${icon('trophy',14)}${fmt(M.best||0)}</span></div>
+ U.innerHTML=`<div class="pn ${DEV.enabled?'lab-command':''}">${DEV.enabled?'<header class="lab-brand"><p>PUESTO 7 · 2089</p><h1>ERA Z</h1><span>v0.2.0-dev.1</span></header>':'<h2>Puesto 7</h2>'}<div class="chips"><span class="chip">${icon('user',14)}${c[0]}</span><span class="chip">${icon('coins',14)}${M.gold}</span><span class="chip">${icon('trophy',14)}${fmt(M.best||0)}</span></div>
  <button class="pri" id="m-play">${icon('play',22)} Jugar</button>
  <div class="row2"><button id="m-char">${icon('user',18)} Personaje</button><button id="m-mis">${icon('list-checks',18)} Misiones${cl?`<span class="badge">${cl}</span>`:''}</button><button id="m-tal">${icon('wrench',18)} Taller</button><button id="m-set">${icon('settings',18)} Ajustes</button></div>
  <div class="row2"><button class="ghost" id="m-news">${icon('newspaper',18)} Novedades</button><button class="ghost" id="m-story">${icon('book-open',18)} Historia</button></div></div>`;
@@ -35,15 +35,17 @@ const chgList=(t,ic,a)=>a&&a.length?`<h3>${icon(ic,14)} ${t}</h3><ul class="chg"
 const chgBody=r=>chgList('Añadido','plus',r.añadido)+chgList('Mejorado','trending-up',r.mejorado)+chgList('Corregido','check',r.corregido);
 UI.def('novedades',()=>{const [cur,...old]=VERSIONES.lista,d=VERSIONES.desarrollo,EST={listo:'Listo · pendiente de publicar',diseño:'En diseño',plan:'Planificado'};
  U.innerHTML=`<div class="pn">${topBar('Novedades')}
+ ${DEV.enabled?'<h3>Actualizaciones</h3>':''}
  <section class="rel" aria-labelledby="rel-t"><div class="rel-h"><span class="tag ok">Publicada</span><h3 id="rel-t">v${cur.v} · ${cur.nombre}</h3><p>${fechaLarga(cur.fecha)}</p></div>${chgBody(cur)}
  ${cur.conocidos.length?chgList('Problemas conocidos','bug',cur.conocidos):''}<p class="src">${cur.fuente}</p></section>
+ ${DEV.enabled?'<h3>Próximamente</h3>':''}
  <section class="rel dev" aria-labelledby="dev-t"><div class="rel-h"><span class="tag dev">${icon('hammer',12)} En desarrollo · no publicado</span><h3 id="dev-t">v${d.v} · ${d.nombre}</h3></div>
  <ul class="chg">${d.items.map(([e,t])=>`<li><span class="st st-${e}">${EST[e]}</span> ${t}</li>`).join('')}</ul></section>
  <h3>${icon('history',14)} Historial</h3>${old.map(r=>`<details class="old"><summary>${r.v?'v'+r.v+' · ':''}${r.nombre} · ${fechaLarga(r.fecha)}</summary>${chgBody(r)}<p class="src">${r.fuente}</p></details>`).join('')}
  </div>`;bindBack()},{state:'menu'});
 UI.def('misiones',()=>{missions()},{state:'menu'});
 /* Ruleta del Taller (ERAZ-010): pantalla de menú; el cobro y el premio ya se guardaron en workshopSpin(). */
-UI.def('ruleta-taller',p=>{spinAnim(p.res,'Ruleta de la suerte',ft=>{const b=document.createElement('button');b.className='pri';b.innerHTML=`${icon('arrow-left',20)} Volver al Taller`;b.onclick=()=>UI.back();if(ft)ft.appendChild(b);if(!INP.touch)b.focus()})},{state:'menu'});UI.def('taller',()=>{menu()},{state:'menu'});
+UI.def('ruleta-taller',p=>{spinAnim(p.res,'Ruleta de la suerte',ft=>{const b=document.createElement('button');b.className='pri';b.innerHTML=`${icon('arrow-left',20)} Volver al Taller`;b.onclick=()=>UI.back();if(ft)ft.appendChild(b);if(!INP.touch)b.focus()})},{state:'menu'});UI.def('taller',p=>{menu(p.tab)},{state:'menu'});
 
 /* ---------- Dificultad, historia ---------- */
 function modes(){UI.go('dificultad')}

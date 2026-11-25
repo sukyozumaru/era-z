@@ -14,6 +14,7 @@ DZ.addEventListener('pointerdown',e=>{e.stopPropagation();e.preventDefault();try
 const DK=document.createElement('div');DK.id='dk';DK.innerHTML=`${icon('zap',16)}<span></span>`;WR.appendChild(DK);
 const PXU=new Map(),pxeURL=e=>PXU.get(e)||(PXU.set(e,pxe(e).toDataURL()),PXU.get(e));
 function hudDom(){
+ LAB.display();
  const inG=!!P&&S!=='menu',vis=inG?'block':'none';if(HUD._v!==vis){HUD._v=vis;HUD.style.display=vis}
  const pl=inG&&S==='play',ph=pl?'flex':'none',dh=pl&&INP.touch?'flex':'none',kh=pl&&!INP.touch?'flex':'none';
  if(PZ._d!==ph){PZ._d=ph;PZ.style.display=ph}if(DZ._d!==dh){DZ._d=dh;DZ.style.display=dh}if(DK._d!==kh){DK._d=kh;DK.style.display=kh}
@@ -22,7 +23,7 @@ function hudDom(){
  if(HUD._hp!==hs){HUD._hp=hs;document.getElementById('h-hpn').textContent=hs;document.getElementById('h-hp').style.width=(100*Math.max(0,P.hp/P.mhp)).toFixed(1)+'%'}
  const xs=P.xp.toFixed(1)+'/'+P.need;if(HUD._xp!==xs){HUD._xp=xs;document.getElementById('h-xp').style.width=(100*Math.min(1,P.xp/P.need)).toFixed(1)+'%'}
  const lv='NV '+P.lvl;if(HUD._lv!==lv){HUD._lv=lv;document.getElementById('h-lv').textContent=lv}
- const ts=fmt(T);if(HUD._t!==ts){HUD._t=ts;document.getElementById('h-t').textContent=ts}
+ const ts=fmt(DEV.director||DEV.portal?LAB.mission:T);if(HUD._t!==ts){HUD._t=ts;document.getElementById('h-t').textContent=ts}
  const ks=K+'|'+RIn;if(HUD._k!==ks){HUD._k=ks;document.getElementById('h-k').innerHTML=icon('skull',14)+K;document.getElementById('h-c').innerHTML=icon('coins',14)+RIn}
  const sig=Object.keys(WS).map(k=>WS[k]).join()+'|'+Object.keys(PS).map(k=>PS[k]).join();
  if(HUD._w!==sig){HUD._w=sig;document.getElementById('h-w').innerHTML=[...Object.keys(WS).filter(k=>WS[k]).map(k=>[IW[k],WS[k],WP[k][0]]),...Object.keys(PS).filter(k=>PS[k]).map(k=>[PV[k][1],PS[k],PV[k][0]])].map(([e,l,n])=>`<div class="wp" title="${n}"><img alt="${n}" src="${pxeURL(e)}"><b>${l}</b></div>`).join('')}

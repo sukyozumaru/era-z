@@ -30,7 +30,7 @@ function updShadows(on){if(!SCN)return;if(!ESH){ESH=new TH.InstancedMesh(SHG,SHM
  ESH.count=n;ESH.instanceMatrix.needsUpdate=true}
 /* Perfil gráfico */
 SO.pf=['Automático','Alto','Bajo consumo'];SL.pf='Perfil gráfico';M.set.pf=M.set.pf|0;
-if(!localStorage.getItem('arcane1')&&INP.touch)Object.assign(M.set,{q:0,d:0,p:0,r:1});
+if(!localStorage.getItem(DEV.saveKey)&&INP.touch)Object.assign(M.set,{q:0,d:0,p:0,r:1});
 function applyPerfProfile(){const low=M.set.pf===2||(M.set.pf===0&&INP.touch);Object.assign(LIM,low?{wave:140,enemies:220,gems:250,corpses:60,particles:140,flame:60}:{wave:230,enemies:320,gems:400,corpses:150,particles:300,flame:160});return low}
 {const s0=start;start=function(){applyPerfProfile();if(typeof FL!=='undefined'){FL.hold=0;FL.on=false;FL.acc=0;for(const p of FLP)p.on=false}s0.apply(this,arguments)}}
 applyPerfProfile();

@@ -46,5 +46,5 @@ function draw2D(){X=XL;X.setTransform(.5,0,0,.5,0,0);X.imageSmoothingEnabled=tru
  if(TX.t>0){X.globalAlpha=Math.min(1,TX.t);X.textAlign='center';X.font='bold 14px monospace';X.fillStyle=TX.c;X.fillText(TX.s,W/2,66);X.globalAlpha=1}
 }
 let last=performance.now();
-function loop(n){const dt=Math.min(.05,(n-last)/1000);last=n;if(S==='play')step(dt);draw();requestAnimationFrame(loop)}
+function loop(n){const dt=Math.min(.05,(n-last)/1000);last=n;if(S==='play'){if(WON&&T>=P.kingVictoryAt)die();else step(dt)}draw();requestAnimationFrame(loop)}
 /* El bucle arranca desde index.html cuando todos los scripts han terminado de cargar. */

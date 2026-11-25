@@ -5,10 +5,10 @@ let X=XM,W,H,rt=0,VG,LC=document.createElement('canvas'),XL=LC.getContext('2d');
 function rs(){const d=Math.min(devicePixelRatio||1,3);W=WR.clientWidth;H=WR.clientHeight;rt=WR.getBoundingClientRect().top;C.width=W*d;C.height=H*d;XM.setTransform(d,0,0,d,0,0);LC.width=Math.ceil(W/2);LC.height=Math.ceil(H/2);if(R3){R3.setSize(W,H);CAM.aspect=W/H;CAM.updateProjectionMatrix()}VG=XM.createRadialGradient(W/2,H/2,H*.25,W/2,H/2,Math.max(W,H)*.75);VG.addColorStop(0,'rgba(0,0,0,0)');VG.addColorStop(1,'rgba(100,28,0,.6)')}
 addEventListener('resize',rs);rs();
 let M={gold:0,d:0,h:0,s:0,x:0,own:{},w:{},found:{},ch:0,co:{0:1},rel:{},eq:[],st:{k:0,bs:0,mg:0,ob:0,pt:0,rl:0,runs:0,bt:0,win:{}},mc:{},set:{mv:.5,sv:.8,q:1,r:1,d:1,p:1,sh:1,z:1}};
-try{Object.assign(M,JSON.parse(localStorage.getItem('arcane1')||'{}'))}catch(e){}
+try{Object.assign(M,JSON.parse(localStorage.getItem(DEV.saveKey)||'{}'))}catch(e){}
 /* Migración de ajustes: completa claves nuevas sin perder las guardadas. cm (movimiento de cámara) hereda el antiguo 'Temblor de cámara = No'. */
 {const o=M.set||{};M.set=Object.assign({mv:.5,sv:.8,q:1,r:1,d:1,p:1,sh:1,z:1,rf:0,cm:o.sh===0?2:0},o)}
-const save=()=>{try{localStorage.setItem('arcane1',JSON.stringify(M))}catch(e){}};
+const save=()=>{try{localStorage.setItem(DEV.saveKey,JSON.stringify(M))}catch(e){}};
 const cost=k=>Math.round(8*Math.pow(1.7,M[k]));
 function pix(c){const x=c.getContext('2d'),w=c.width,h=c.height,d=x.getImageData(0,0,w,h),a=d.data,al=new Uint8Array(w*h);
 for(let i=0;i<w*h;i++){const j=i*4;if(a[j+3]<110)a[j+3]=0;else{a[j+3]=255;al[i]=1;for(let k=0;k<3;k++)a[j+k]=Math.round(a[j+k]/20)*20}}

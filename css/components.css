@@ -8,3 +8,30 @@
 .dlg-row button{margin:0;min-height:var(--tap);border:var(--bw) solid var(--c-steel-2);border-radius:var(--r-1);box-shadow:none;background:var(--c-bg-3);color:var(--c-text);font-size:var(--fs-sm);text-transform:uppercase}
 .dlg-row button.btn-danger{background:#3a1a14;border-color:var(--c-danger);color:#ffb3a5}
 .dlg-row button:focus-visible{outline:3px solid var(--c-warn);outline-offset:2px}
+
+#lab-objective{position:absolute;z-index:6;top:3.4rem;left:50%;transform:translateX(-50%);padding:.35rem .7rem;background:#211439;color:#f4e7ff;border:1px solid #b38af7;font-weight:700;white-space:nowrap;pointer-events:none}
+.lab-rift::after{content:"";position:absolute;inset:0;pointer-events:none;background:#8c4fe9;z-index:8;animation:lab-rift .45s ease-out forwards}
+@keyframes lab-rift{from{opacity:.42}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.lab-rift::after{display:none}}
+
+.lab-command{width:min(620px,94vw);background:linear-gradient(155deg,#212b18,#11180e 75%)}
+.lab-brand{margin:0 0 1rem;padding:.75rem 0 1rem;border-bottom:1px solid #69744e}
+.lab-brand p,.lab-brand span{color:#bdc5ab;margin:.25rem 0;letter-spacing:.12em}
+.lab-brand h1{font-size:clamp(1.6rem,8vw,3.5rem);margin:.65rem 0;color:#ffbf00}
+
+.workshop-heading{border-bottom:1px solid var(--c-steel-2);margin-bottom:var(--sp-3)}
+.workshop-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.workshop-nav button{min-height:44px;margin:0;padding:4px;line-height:1.2;overflow-wrap:anywhere}
+.workshop-nav [aria-current]{background:var(--c-green-1);color:var(--c-text);border-color:var(--c-warn)}
+.workshop-list{list-style:none;padding:0;margin:0;display:grid;gap:5px}
+.workshop-list .card{margin:0}
+.workshop-price{margin-left:auto;text-align:right}
+.workshop-row{display:flex;gap:12px;align-items:start;padding:10px;border-bottom:1px solid var(--c-steel-2)}
+.workshop-row small,.workshop .workshop-status{display:block}
+.workshop .workshop-status{color:var(--c-warn)}
+.workshop-odds{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:12px 0}
+.workshop-odds div{background:var(--c-bg-2);padding:10px 4px;text-align:center}
+.workshop-odds dd{margin:4px 0 0;font-weight:700;color:var(--c-warn)}
+.workshop-canje{padding:12px;background:var(--c-bg-2)}
+.workshop-canje select{display:block;width:100%;margin:4px 0 8px}
+@media(max-width:430px){.workshop-nav{grid-template-columns:repeat(3,minmax(0,1fr))}}

@@ -5,7 +5,7 @@
    · Atribución de daño: la variable global DS (00-config) indica la fuente activa; hit() llama a ST.hit/ST.kill.
    · Persistencia: las últimas 30 partidas humanas en localStorage['erazStats'] (independiente de 'arcane1').
    · API de consola: ERAZ_STATS.last(), .all(), .exportJSON(), .exportCSV(), .download(), .clear(). */
-const ST={ver:VERSIONES.publicada,key:'erazStats',max:30,run:null,hits:new Map(),forceSeed:null,simMode:false,xpBank:0,
+const ST={ver:DEV.enabled?DEV.version:(VERSIONES.candidata||VERSIONES.publicada),key:DEV.statsKey,max:30,run:null,hits:new Map(),forceSeed:null,simMode:false,xpBank:0,
  newSeed(){return (((Date.now()&0xffffffff)^Math.floor(ST._r()*4294967296))>>>0)},_r:Math.random,
  seedRng(s){let a=s>>>0;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},
  cat(e){return e.king?'jefe final':e.boss?(e.mg?'mega jefe':'jefe'):e.el?'élite':(e.k==='spit'||e.k==='bom')?'especial':(e.k==='a'||e.k==='b'||e.k==='c')?'zombi':'bestia'},

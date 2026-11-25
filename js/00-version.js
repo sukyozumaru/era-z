@@ -5,8 +5,14 @@
    3. Cambiar el ?v= de index.html (cache busting) en la misma publicación.
    Campos: añadido / mejorado / corregido / conocidos = listas de textos cortos para jugadores. */
 const VERSIONES={
- publicada:'0.1.0-alpha.3',
+ publicada:'0.2.0',
  lista:[
+  {v:'0.2.0',nombre:'Wrath of the Mammoth',fecha:'2026-11-25',
+   fuente:'Publicación 0.2.0 (fecha pendiente de verificar en el despliegue)',
+   añadido:['Mamut Rey rediseñado: silueta propia, señales más claras para embestida, pisotón y barrido, y postura y cristales distintos en cada fase.','Rugido y efectos propios del Mamut, con un motivo musical que cambia durante el duelo.','Taller con cinco secciones: Mejoras permanentes, Arsenal, Ruleta, Reliquias y Colección. La ruleta muestra su tabla real de rarezas.','Modelo del Mamut más ligero con el ajuste de bajo consumo.'],
+   mejorado:['El Taller distingue lo descubierto, lo desbloqueado y lo equipado.'],
+   corregido:['El dash es una maniobra defensiva: conserva desplazamiento e invulnerabilidad y ya no hace daño.','Si pausas justo al vencer al Mamut, la victoria se conserva y el premio se abona una sola vez.'],
+   conocidos:['Rendimiento, controles táctiles y audio pendientes de validar en teléfono físico.','La dificultad sigue variando mucho entre perfiles nuevos y perfiles con muchas mejoras.']},
   {v:'0.1.0-alpha.3',nombre:'Workshop & Combat Insights',fecha:'2026-11-24',
    fuente:'Publicación alpha.3',
    añadido:['Estadísticas de combate por partida y exportación en JSON y CSV.','Pantalla de Novedades y versión visible en el inicio.'],
@@ -39,6 +45,6 @@ const VERSIONES={
    mejorado:['Separación entre enemigos y efectos de disparo, críticos, dash y explosiones.'],corregido:['Los rayos de la Tormenta eléctrica eran invisibles.'],conocidos:[]},
   {v:null,nombre:'Maqueta original «Zombie Survivor»',fecha:null,fuente:'Creada por Rencorosito antes de la publicación',
    añadido:['Base del juego: personajes, armas, objetos, reliquias, Taller, misiones, modos Historia, Difícil y Hardcore.'],mejorado:[],corregido:[],conocidos:[]}],
- desarrollo:{v:'0.2.0',nombre:'Combat Balance & Progression Overhaul',
+ desarrollo:{v:'0.3.0',nombre:'Combat Balance & Progression Overhaul',
   items:[['diseño','Director de dificultad por tiempo: hordas, élites garantizados y minijefes.'],
    ['plan','Rebalanceo de armas, enemigos, recompensas y curva de experiencia.']]}};

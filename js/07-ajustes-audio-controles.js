@@ -3,7 +3,7 @@ const SB=()=>AC.sb||(AC.sb=(()=>{const g=AC.createGain();g.gain.value=M.set.sv;g
 function applyG(){const s=M.set;if(R3){R3.setPixelRatio(RSV[s.r]);R3.setSize(W,H);SCN.fog.near=[300,600,900][s.d];SCN.fog.far=[1000,1900,2800][s.d];SHM.opacity=s.q?.4:0}if(AC){MBg().gain.value=s.mv*.5;SB().gain.value=s.sv}}
 /* Dirección del dash (ERAZ-001): la del movimiento actual (joystick o teclado); si estás quieto, la última dirección de movimiento; si nunca te moviste, hacia donde miras. */
 function dashAngle(){const dx=jx+keys.d-keys.a,dy=jy+keys.s-keys.w;return Math.hypot(dx,dy)>.1?Math.atan2(dy,dx):(P.ma!==undefined?P.ma:P.a)}
-function dash(){if(S!=='play'||P.dc>0)return;P.dc=3;P.dsh=.2;P.hs=new Set();P.iv=.4;P.da=dashAngle();snd(420,.18,'sawtooth',.07,2.4);spark3(P.x,hH(P.x,P.y)+10,P.y,14,['#ffffff','#99ccff'],140,.3,60)}
+function dash(){if(S!=='play'||P.dc>0)return;P.dc=3;P.dsh=.2;P.iv=.4;P.da=dashAngle();snd(420,.18,'sawtooth',.07,2.4);spark3(P.x,hH(P.x,P.y)+10,P.y,14,['#ffffff','#99ccff'],140,.3,60)}
 addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ShiftLeft'||e.code==='ShiftRight'){if(S==='play'){e.preventDefault();if(!e.repeat)dash()}}});
 let HF=0;const DN=[];
 addEventListener('keydown',e=>{if(e.repeat)return;if(e.key==='Escape'||e.code==='KeyP'){if(S==='play')pauseP();else if(S==='pause'&&document.getElementById('p1')){S='play';U.innerHTML=''}}});document.addEventListener('visibilitychange',()=>{if(document.hidden&&S==='play')pauseP()});
