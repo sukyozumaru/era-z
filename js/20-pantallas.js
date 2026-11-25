@@ -7,7 +7,7 @@
 const UI={stack:[],cur:null,reg:{},tw:null,
  ctx:{mode:'solo',players:[{id:'local',local:true}],pauseFreezes:true},
  def(n,f,o){this.reg[n]={f,o:o||{}}},
- show(n,p){clearInterval(this.tw);const r=this.reg[n];this.cur={n,p:p||{}};if(r.o.state==='menu'&&S!=='pause')S='menu';r.f(this.cur.p)},
+ show(n,p){clearInterval(this.tw);if(typeof spinCancel==='function')spinCancel();const r=this.reg[n];this.cur={n,p:p||{}};if(r.o.state==='menu'&&S!=='pause')S='menu';r.f(this.cur.p)},
  go(n,p){if(this.cur)this.stack.push(this.cur);this.show(n,p)},
  back(){const b=this.stack.pop();b?this.show(b.n,b.p):this.home()},
  home(){this.stack=[];this.cur=null;this.show('principal')},
@@ -29,7 +29,9 @@ UI.def('principal',()=>{const c=CHR[M.ch],cl=MS.filter((m,i)=>m[1](M.st)>=m[2]&&
  <div class="row2"><button id="m-char">${icon('user',18)} Personaje</button><button id="m-mis">${icon('list-checks',18)} Misiones${cl?`<span class="badge">${cl}</span>`:''}</button><button id="m-tal">${icon('wrench',18)} Taller</button><button id="m-set">${icon('settings',18)} Ajustes</button></div>
  <button class="ghost" id="m-story">${icon('book-open',18)} Ver historia</button></div>`;
  $('m-play').onclick=()=>UI.go('dificultad');$('m-char').onclick=()=>UI.go('personajes');$('m-mis').onclick=()=>UI.go('misiones');$('m-tal').onclick=()=>UI.go('taller');$('m-set').onclick=()=>UI.go('ajustes');$('m-story').onclick=()=>UI.go('historia',{i:0,then:'back'})},{state:'menu'});
-UI.def('misiones',()=>{missions()},{state:'menu'});UI.def('taller',()=>{menu()},{state:'menu'});
+UI.def('misiones',()=>{missions()},{state:'menu'});
+/* Ruleta del Taller (ERAZ-010): pantalla de menú; el cobro y el premio ya se guardaron en workshopSpin(). */
+UI.def('ruleta-taller',p=>{spinAnim(p.res,'Ruleta de la suerte',ft=>{const b=document.createElement('button');b.className='pri';b.innerHTML=`${icon('arrow-left',20)} Volver al Taller`;b.onclick=()=>UI.back();if(ft)ft.appendChild(b);if(!INP.touch)b.focus()})},{state:'menu'});UI.def('taller',()=>{menu()},{state:'menu'});
 
 /* ---------- Dificultad, historia ---------- */
 function modes(){UI.go('dificultad')}
