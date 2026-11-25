@@ -1,6 +1,6 @@
 # Auditoría de navegación y propuesta UI/UX (ERAZ-006 a 009)
 
-> **Estado: auditoría + propuesta + base técnica. La interfaz actual NO se ha reemplazado.** Espera aprobación (Gabo / Rencorosito).
+> **Estado: dirección aprobada por el equipo; implementada en v0.1.0-alpha.2 (ver `INFORME-UI-ALPHA2.md` y `ARQUITECTURA-UI.md`).** Pendiente de validación humana en el Playtest #002.
 > Maqueta visual: `docs/propuesta-ui/mockup.html` (estática, usa `css/tokens.css`). Capturas: `docs/capturas/propuesta-ui-*.jpg`.
 > La auditoría se hizo leyendo el código y recorriendo las pantallas en el navegador (automatizado). Falta la opinión humana de Rencorosito sobre dónde se pierde.
 
@@ -81,7 +81,13 @@ La pantalla de personaje reserva el panel «arma y objeto exclusivos» y Misione
 6. HUD y cartas de nivel (U11, U12, U13) y cambio de paleta global.
 Cada paso: commit independiente, prueba automática de navegación (todas las rutas alcanzan «Volver», ningún panel desborda en 320×568, 375×812 y 812×375) y comprobación en teléfono por Rencorosito.
 
-## 5. Decisiones que necesito de vosotros
+## 5. Decisiones (resueltas por el equipo)
+- Abandonar conserva monedas legítimas sin bonificación de victoria; reiniciar descarta con confirmación.
+- La historia se muestra la primera vez y se puede volver a ver desde el menú.
+- Iconos: Lucide para navegación y controles, pixel art propio para armas y objetos.
+- Tipografía: pixelada solo para títulos; legible para el resto.
+
+(Texto original de la consulta:)
 - ¿Aprobáis la arquitectura de navegación y la paleta (verde militar + amarillo advertencia)?
 - ¿Abandonar una partida debe conceder las monedas ganadas hasta ese momento, o perderlas (como hoy)? La propuesta advierte de la pérdida; hay que decidirlo.
 - ¿La historia solo la primera vez o siempre con «Saltar»?
