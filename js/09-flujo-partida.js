@@ -46,6 +46,6 @@ function levelUp(){
 function die(){
  S='dead';if(!WON)sfx.die();endRun();
  const m=Math.floor(T/60),s=Math.floor(T%60);
- U.innerHTML=`<div class="pn"><h2>${WON?'¡Victoria!':'Has caído'}</h2><p>Sobreviviste ${m}:${String(s).padStart(2,'0')}, nivel ${P.lvl}, ${K} zombis abatidos y ${RIn} objetos o armas de cofres.<br>Ganaste ${gain} monedas.${UN}</p><button id="bk">Volver al menú</button></div>`;
- document.getElementById('bk').onclick=lobby;
+ U.innerHTML=`<div class="pn"><h2>${WON?'¡Victoria!':'Has caído'}</h2><p>Sobreviviste ${m}:${String(s).padStart(2,'0')}, nivel ${P.lvl}, ${K} zombis abatidos y ${RIn} objetos o armas de cofres.<br>Ganaste ${gain} monedas.${UN}</p><button id="rt" style="font-size:20px;padding:16px">↻ Reintentar</button><button id="bk">Volver al menú</button></div>`;
+ document.getElementById('rt').onclick=()=>start();document.getElementById('bk').onclick=lobby;
 }

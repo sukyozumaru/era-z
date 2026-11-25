@@ -11,7 +11,7 @@ addEventListener('blur',()=>{keys.w=keys.a=keys.s=keys.d=0;jo=null;jx=jy=0});
 /* Atajos de teclado: 1/2/3 eligen carta (nivel/cofre), Enter confirma el botón principal */
 addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
  if(S==='lvl'&&/^[1-3]$/.test(e.key)){const b=U.querySelectorAll('button.card')[+e.key-1];if(b){e.preventDefault();b.click()}}
- else if(S==='dead'&&e.key==='Enter'){const b=document.getElementById('bk');if(b){e.preventDefault();b.click()}}});
+ else if(S==='dead'&&e.key==='Enter'){const b=document.getElementById('rt')||document.getElementById('bk');if(b){e.preventDefault();b.click()}}});
 /* Entrada táctil (ERAZ-001): cada dedo se gestiona por pointerId. El primer toque fuera de botones y paneles es el joystick;
    DASH y pausa reaccionan a su propio pointerdown y no tocan el estado del joystick. El ratón nunca crea joystick. */
 addEventListener('pointerdown',e=>{INP.touch=e.pointerType!=='mouse';if(e.pointerType==='mouse'||jo)return;if(e.target.closest&&e.target.closest('button,.pn'))return;jo={x:e.clientX,y:e.clientY,id:e.pointerId}});

@@ -1,0 +1,10 @@
+/* Era Z — componentes nuevos basados en tokens (css/tokens.css). Primera pieza: diálogo de confirmación. */
+.pn.dlg{background:var(--c-bg-1);color:var(--c-text);border:var(--bw) solid var(--c-steel-2);border-top:6px solid var(--c-warn);border-radius:var(--r-1);padding:var(--sp-4);box-shadow:var(--shadow-panel);font-family:var(--f-ui)}
+.pn.dlg.dlg-danger{border-top-color:var(--c-danger)}
+.pn.dlg h2{font-family:var(--f-display);font-size:var(--fs-md);line-height:1.4;color:var(--c-warn);margin:0 0 var(--sp-3);letter-spacing:0;text-transform:uppercase}
+.pn.dlg.dlg-danger h2{color:var(--c-danger)}
+.pn.dlg p{color:var(--c-text);font-size:var(--fs-sm);margin:0 0 var(--sp-4)}
+.dlg-row{display:flex;gap:var(--sp-2)}
+.dlg-row button{margin:0;min-height:var(--tap);border:var(--bw) solid var(--c-steel-2);border-radius:var(--r-1);box-shadow:none;background:var(--c-bg-3);color:var(--c-text);font-size:var(--fs-sm);text-transform:uppercase}
+.dlg-row button.btn-danger{background:#3a1a14;border-color:var(--c-danger);color:#ffb3a5}
+.dlg-row button:focus-visible{outline:3px solid var(--c-warn);outline-offset:2px}
