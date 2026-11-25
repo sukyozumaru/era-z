@@ -45,14 +45,18 @@ function bot(){const sp=P.spd;let best=null,bv=1e18;
   if(v<bv){bv=v;best=[dx,dy]}}
  jx=best[0];jy=best[1];
  if(P.dc<=0&&danger(P.x,P.y)>45)dash()}
+/* Bot «novato»: decide cada 0,5 s, solo huye del enemigo más cercano (sin prever), no esquiva avisos, ácido ni ondas, y no usa dash. */
+let nvT=0;function botNovato(dt){nvT-=dt;if(nvT>0)return;nvT=.5;let n=null,nd=1e9;for(const e of E){if(e.dead)continue;const d=Math.hypot(e.x-P.x,e.y-P.y);if(d<nd){nd=d;n=e}}
+ if(n&&nd<160){const d=nd||1;jx=(P.x-n.x)/d;jy=(P.y-n.y)/d;return}
+ let g=null,gd=1e9;for(const q of G){const d=Math.hypot(q.x-P.x,q.y-P.y);if(d<gd){gd=d;g=q}}if(g&&gd<400){jx=(g.x-P.x)/gd;jy=(g.y-P.y)/gd}else{jx=jy=0}}
 function spinSync(mode){const g=mode==='gamble',L=g?0:P.luck,res=roll(mode==='wheel'?[12,28,34,26]:g?[22,30,28,20]:[Math.max(10,45-5*L),30,18+3*L,7+2*L]);ST.pick('ruleta',[res.n],res.n);ST.reward('ruleta');give(res,!g);S='play';U.innerHTML=''}
-function run(o={}){const render=!!o.render,seed=o.seed??1,ch=o.ch??0,mode=o.mode??0,policy=o.policy||'equilibrada',maxT=o.maxT??660,dt=o.dt??1/30,clean=o.clean!==false;
+function run(o={}){const render=!!o.render,move=o.move||'competente',seed=o.seed??1,ch=o.ch??0,mode=o.mode??0,policy=o.policy||'equilibrada',maxT=o.maxT??660,dt=o.dt??1/30,clean=o.clean!==false;
  const backup=JSON.stringify(M),spin0=spin,t0=performance.now(),drawMs=[];
- if(clean)Object.assign(M,{d:0,h:0,s:0,x:0,own:{},w:{},eq:[]});M.ch=ch;M.seen=1;
- spin=spinSync;ST.simMode=true;ST.forceSeed=seed;MD=MODES[mode];MI=mode;jo=null;jx=jy=0;for(const k in keys)keys[k]=0;
+ if(clean)Object.assign(M,{d:0,h:0,s:0,x:0,own:{},w:{},eq:[]});if(o.profile)Object.assign(M,JSON.parse(JSON.stringify(o.profile)));M.ch=ch;M.seen=1;
+ const set0=JSON.stringify(M.set);M.set.pf=1;applyPerfProfile();spin=spinSync;ST.simMode=true;ST.forceSeed=seed;MD=MODES[mode];MI=mode;jo=null;jx=jy=0;for(const k in keys)keys[k]=0;
  start();S='play';U.innerHTML='';let n=0,win=false;const cap=Math.ceil(maxT/dt)+10;
- try{while(T<maxT&&n<cap){if(S==='lvl'){if(!choose(policy)){S='play';U.innerHTML=''}continue}if(S!=='play')break;if(WON){win=true;die();break}bot();step(dt);n++;if(render){const t1=performance.now();flT=performance.now()-dt*1000;draw();drawMs.push(performance.now()-t1)}}
+ try{while(T<maxT&&n<cap){if(S==='lvl'){if(!choose(policy)){S='play';U.innerHTML=''}continue}if(S!=='play')break;if(WON){win=true;die();break}if(move==='competente')bot();else if(move==='novato')botNovato(dt);else{jx=jy=0}step(dt);n++;if(render){const t1=performance.now();flT=performance.now()-dt*1000;draw();drawMs.push(performance.now()-t1)}}
   if(S==='play'&&!WON){ST.end('tiempo límite')}}
- finally{spin=spin0;ST.simMode=false;Object.keys(M).forEach(k=>delete M[k]);Object.assign(M,JSON.parse(backup));save();jx=jy=0;S='menu';UI.home()}
- const s=ST.summary(ST.run);if(render&&drawMs.length){const a=drawMs.slice().sort((x,y)=>x-y);s.drawMs={medio:+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2),p95:+a[Math.floor(a.length*.95)].toFixed(2),max:+a[a.length-1].toFixed(2)}}s.politica=policy;s.pasos=n;s.msReales=Math.round(performance.now()-t0);s.dt=+dt.toFixed(4);return s}
+ finally{spin=spin0;ST.simMode=false;Object.keys(M).forEach(k=>delete M[k]);Object.assign(M,JSON.parse(backup));M.set=JSON.parse(set0);applyPerfProfile();save();jx=jy=0;S='menu';UI.home()}
+ const s=ST.summary(ST.run);if(render&&drawMs.length){const a=drawMs.slice().sort((x,y)=>x-y);s.drawMs={medio:+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(2),p95:+a[Math.floor(a.length*.95)].toFixed(2),max:+a[a.length-1].toFixed(2)}}s.politica=policy;s.movimiento=move;s.perfil=o.profileName||(o.profile?'personalizado':'nuevo');s.armasIniciales=Object.entries(o.profile&&o.profile.w||{}).filter(x=>x[1]).map(x=>x[0]+' '+x[1]);s.pasos=n;s.msReales=Math.round(performance.now()-t0);s.dt=+dt.toFixed(4);return s}
 return{run,score,bot}})();

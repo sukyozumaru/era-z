@@ -13,6 +13,7 @@ const ST={ver:'0.1.0-alpha.2+analytics',key:'erazStats',max:30,run:null,hits:new
   const q=new URLSearchParams(location.search),seed=this.forceSeed!=null?this.forceSeed>>>0:(q.get('seed')!=null?(+q.get('seed'))>>>0:this.newSeed());this.forceSeed=null;this.seedRng(seed);
   this.xpBank=0;this.hits.clear();this.nextMin=60;this.nextPerf=10;
   this.run={ver:this.ver,seed,sim:this.simMode,date:new Date().toISOString(),ch:CHR[M.ch][0],mode:MD.n,
+   ajustes:{perfilGrafico:['Automático','Alto','Bajo consumo'][M.set.pf|0],particulas:M.set.p,reducirEfectos:M.set.rf|0,tactil:INP.touch},
    meta:{dmg:M.d,vida:M.h,vel:M.s,xp:M.x,objetos:Object.values(M.own).reduce((a,b)=>a+b,0),armas:Object.values(M.w).reduce((a,b)=>a+b,0),reliquias:M.eq.length},
    w:{},cat:{},kcat:{},hurt:{},picks:[],rewards:{},elites:[],bosses:[],min:[],perf:[],res:null,last:null}},
  W(s){return this.run.w[s]||(this.run.w[s]={dmg:0,eff:0,hits:0,kills:0,acts:0,targets:0,first:T})},
@@ -26,10 +27,10 @@ const ST={ver:'0.1.0-alpha.2+analytics',key:'erazStats',max:30,run:null,hits:new
  xpTotal(){return Math.round((this.xpBank+(P?P.xp:0))*10)/10},
  tick(){const r=this.run;if(!r)return;
   for(const [s,set] of this.hits){const w=this.W(s);w.acts++;w.targets+=set.size}this.hits.clear();
-  if(T>=this.nextMin){this.nextMin+=60;r.min.push({m:Math.round(T/60),lvl:P.lvl,xp:this.xpTotal(),bajas:K,dmg:Math.round(Object.values(r.w).reduce((a,w)=>a+w.eff,0)),recibido:Math.round(Object.values(r.hurt).reduce((a,b)=>a+b,0)),vivos:E.length,vida:Math.round(P.hp),vidaMax:Math.round(P.mhp)})}
+  if(T>=this.nextMin){this.nextMin+=60;r.min.push({m:Math.round(T/60),lvl:P.lvl,xp:this.xpTotal(),bajas:K,dmg:Math.round(Object.values(r.w).reduce((a,w)=>a+w.eff,0)),recibido:Math.round(Object.values(r.hurt).reduce((a,b)=>a+b,0)),vivos:E.length,vida:Math.round(P.hp),vidaMax:Math.round(P.mhp),monedasSiAbandona:typeof coinsAtStake==='function'?coinsAtStake():null})}
   if(T>=this.nextPerf){this.nextPerf+=10;const s=(!this.simMode&&window.ERAZ_DIAG)?ERAZ_DIAG.snapshot():null;
    r.perf.push({t:Math.round(T),enemigos:E.length,balas:B.length,acido:EB.length,gemas:G.length,fx:FX.length,particulas:PA.length,llamadas:(R3&&R3.info)?R3.info.render.calls:0,fps:s?s.fps:null,p95:s?s.p95Ms:null})}},
- end(res){const r=this.run;if(!r||r.res)return null;r.res=res;r.t=+T.toFixed(1);r.lvl=P?P.lvl:0;r.bajas=K;r.xp=this.xpTotal();r.monedas=res==='reinicio'?0:gain;r.cofres=RIn;
+ end(res){const r=this.run;if(!r||r.res)return null;r.res=res;r.t=+T.toFixed(1);r.lvl=P?P.lvl:0;r.bajas=K;r.xp=this.xpTotal();r.monedas=res==='reinicio'?0:(res==='tiempo límite'?coinsAtStake():gain);r.limites={oleada:LIM.wave,enemigos:LIM.enemies};r.cofres=RIn;
   r.muerte=res==='muerte'?{causa:r.last||'?',minuto:+(T/60).toFixed(2)}:null;
   if(!r.sim){try{const a=JSON.parse(localStorage.getItem(this.key)||'[]');a.push(r);while(a.length>this.max)a.shift();localStorage.setItem(this.key,JSON.stringify(a))}catch(e){}}
   return r},
