@@ -8,7 +8,7 @@ const VERSIONES={
  publicada:'0.2.0',
  lista:[
   {v:'0.2.0',nombre:'Wrath of the Mammoth',fecha:'2026-11-25',
-   fuente:'Publicación 0.2.0 (fecha pendiente de verificar en el despliegue)',
+   fuente:'Despliegue de GitHub Pages del 25-11-2026 17:35 UTC, commit 0bff5f8',
    añadido:['Mamut Rey rediseñado: silueta propia, señales más claras para embestida, pisotón y barrido, y postura y cristales distintos en cada fase.','Rugido y efectos propios del Mamut, con un motivo musical que cambia durante el duelo.','Taller con cinco secciones: Mejoras permanentes, Arsenal, Ruleta, Reliquias y Colección. La ruleta muestra su tabla real de rarezas.','Modelo del Mamut más ligero con el ajuste de bajo consumo.'],
    mejorado:['El Taller distingue lo descubierto, lo desbloqueado y lo equipado.'],
    corregido:['El dash es una maniobra defensiva: conserva desplazamiento e invulnerabilidad y ya no hace daño.','Si pausas justo al vencer al Mamut, la victoria se conserva y el premio se abona una sola vez.'],
