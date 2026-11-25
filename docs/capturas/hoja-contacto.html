@@ -20,8 +20,9 @@ const N={
  titulo:'title()',principal:'typeof UI!=="undefined"?UI.home():lobby()',
  dificultad:'typeof UI!=="undefined"?UI.go("dificultad"):modes()',personajes:'typeof UI!=="undefined"?UI.go("personajes"):chars()',
  ajustes:'typeof UI!=="undefined"?UI.go("ajustes"):settings(lobby)',
- pausa:RUN+'pauseP()',nivel:RUN+'P.xp=P.need;step(.05)',
- resultado:RUN+'P.hp=0;step(.05)',hud:RUN+'P.mhp=P.hp=1e6;S="play";U.innerHTML=""'
+ misiones:'typeof UI!=="undefined"?UI.go("misiones"):(lobby(),missions())',taller:'typeof UI!=="undefined"?UI.go("taller"):menu()',
+ pausa:RUN+'pauseP()',cofre:RUN+'pick3()',nivel:RUN+'P.xp=P.need;step(.05)',
+ resultado:RUN+'P.hp=0;step(.05)',hud:RUN+'P.mhp=P.hp=1e6;S="lvl";U.innerHTML=""'
 };
 document.getElementById('t').textContent=`${v==='old'?'ANTES':'DESPUÉS'} · ${vp} ${SZ[0]}×${SZ[1]}`;
 const g=document.getElementById('g');
