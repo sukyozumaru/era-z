@@ -12,6 +12,8 @@ const UI={stack:[],cur:null,reg:{},tw:null,
  back(){const b=this.stack.pop();b?this.show(b.n,b.p):this.home()},
  home(){this.stack=[];this.cur=null;this.show('principal')},
  refresh(){this.cur?this.show(this.cur.n,this.cur.p):this.home()}};
+/* Quien ya jugó antes de esta versión no vuelve a ver la historia automáticamente. */
+if(M.seen===undefined)M.seen=(M.st&&M.st.runs>0)?1:0;
 const $=id=>document.getElementById(id);
 const topBar=(t,back=true)=>`<div class="top">${back?`<button id="bk" aria-label="Volver">${icon('arrow-left',22)}</button>`:''}<h2>${t}</h2></div>`;
 const bindBack=()=>{const b=$('bk');if(b)b.onclick=()=>UI.back()};
