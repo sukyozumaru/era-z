@@ -8,7 +8,7 @@ function spin(mode){
  U.innerHTML=`<div class="pn"><h2>${g?'Ruleta de la suerte':mode==='wheel'?'Ruleta de premios':'¡Cofre abierto!'}</h2>${g||mode==='wheel'?whl(res):''}<div class="rl" id="rl">...</div><div id="ft"></div></div>`;
  const rl=document.getElementById('rl');let d=60;const wh=document.getElementById('wh');if(wh){const sg=WSG;setTimeout(()=>{wh.style.transform=`rotate(${360*6+360-(sg*45+22.5)}deg)`},60)}
  const tick=()=>{if(d<380){const p=POOLP[Math.random()*POOLP.length|0];rl.innerHTML=`<span class="ic" style="color:${RC[p.r]};border-color:${RC[p.r]}">${EM(p)}</span><br>${p.n}`;rl.style.borderColor=rl.style.color=RC[p.r];sfx.tick();d*=1.13;setTimeout(tick,d)}
- else{rl.innerHTML=`<span class="ic" style="color:${RC[res.r]};border-color:${RC[res.r]}">${EM(res)}</span><br>${res.t==='w'?'Arma: ':''}${res.n}<small>${RN[res.r]} · ${res.d}</small>`;sfx.win(res.r);rl.style.borderColor=rl.style.color=RC[res.r];give(res,!g);
+ else{rl.innerHTML=`<span class="ic" style="color:${RC[res.r]};border-color:${RC[res.r]}">${EM(res)}</span><br>${res.t==='w'?'Arma: ':''}${res.n}<small>${RN[res.r]} · ${res.d}</small>`;sfx.win(res.r);rl.style.borderColor=rl.style.color=RC[res.r];if(!g){ST.pick('ruleta',[res.n],res.n);ST.reward('ruleta')}give(res,!g);
   const b=document.createElement('button');b.textContent='Continuar';b.onclick=g?menu:()=>{S='play';U.innerHTML=''};const ft=document.getElementById('ft');if(ft)ft.appendChild(b)}};
  tick()}
 function menu(){

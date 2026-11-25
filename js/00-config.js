@@ -1,6 +1,6 @@
 /* Era Z — configuración global (se carga la primera).
    Presupuestos de entidades y detección de tipo de entrada. */
-let RUN_DONE=0;/* una partida solo puede liquidarse una vez (evita duplicar monedas al abandonar/morir) */
+let RUN_DONE=0,DS='?';/* DS: fuente de daño activa (estadísticas) *//* una partida solo puede liquidarse una vez (evita duplicar monedas al abandonar/morir) */
 const LIM={enemies:320,wave:230,gems:400,eb:48,fx:90,corpses:150};
 /* INP.touch: true si el último dispositivo de entrada usado fue táctil/lápiz. El teclado lo pone en false. */
 const INP={touch:!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches)};

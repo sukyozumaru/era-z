@@ -10,7 +10,7 @@ const KP={
 const KDMG={charge:.9,stomp:.8,sweep:.7,wave:.45};
 const kingPhase=e=>{const f=e.hp/e.mhp;return f>.7?1:f>.35?2:3};
 const angDiff=(a,b)=>{let d=a-b;while(d>Math.PI)d-=6.283185;while(d<-Math.PI)d+=6.283185;return Math.abs(d)};
-function kingHurt(e,m,push){if(P.bf>0||P.iv>0)return false;P.hp-=e.dm*m*P.red;HF=.5;sfx.hurt();buzz(60);if(push){const a=Math.atan2(P.y-e.y,P.x-e.x);P.x+=Math.cos(a)*push;P.y+=Math.sin(a)*push;hitObs(P,9)}return true}
+function kingHurt(e,m,push){if(P.bf>0||P.iv>0)return false;P.hp-=e.dm*m*P.red;ST.hurt('mamut rey: '+({charge:'embestida',stomp:'pisotón',sweep:'barrido',wave:'onda'}[Object.keys(KDMG).find(k=>KDMG[k]===m)]||'?'),e.dm*m*P.red);HF=.5;sfx.hurt();buzz(60);if(push){const a=Math.atan2(P.y-e.y,P.x-e.x);P.x+=Math.cos(a)*push;P.y+=Math.sin(a)*push;hitObs(P,9)}return true}
 sfx.roar=()=>{snd(90,1.1,'sawtooth',.16,.5);snd(140,.9,'square',.06,.4)};
 sfx.stomp=()=>{snd(55,.55,'sine',.32,.3);snd(110,.3,'sawtooth',.1,.3)};
 sfx.charge=()=>snd(150,.8,'sawtooth',.1,3);
