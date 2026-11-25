@@ -52,7 +52,7 @@ function kingAI(e,pd,dt){
 /* Se llama una vez por paso desde step(): mueve las ondas de suelo y comprueba el impacto (una vez por onda). */
 function kingTick(dt){for(const f of FX){if(f.k!=='w')continue;if(f.dl>0){f.dl-=dt;f.hid=1;continue}f.hid=0;f.r+=f.v*dt;
  if(!f.h&&Math.abs(Math.hypot(P.x-f.x,P.y-f.y)-f.r)<16){f.h=1;const b=E.find(q=>q.king);if(b)kingHurt(b,KDMG.wave,60)}}}
-function kingBar(X,e){const w=Math.min(W*.8,520),x=(W-w)/2,y=40,ph=e.ph||1,f=Math.max(0,e.hp/e.mhp),col=['#ffb800','#ff7a1a','#e5484d'][ph-1];
+function kingBar(X,e){const w=Math.min(W*.8,520),x=(W-w)/2,y=62,ph=e.ph||1,f=Math.max(0,e.hp/e.mhp),col=['#ffb800','#ff7a1a','#e5484d'][ph-1];
  X.fillStyle='#000';X.fillRect(x-3,y-3,w+6,15);X.fillStyle='#2a2a2a';X.fillRect(x,y,w,9);X.fillStyle=col;X.fillRect(x,y,w*f,9);
  X.fillStyle='#000a';X.fillRect(x+w*.7-1,y,2,9);X.fillRect(x+w*.35-1,y,2,9);
  if(e.vuln){X.strokeStyle=(performance.now()/120|0)%2?'#fff':'#ffd84a';X.lineWidth=2;X.strokeRect(x-4,y-4,w+8,17)}

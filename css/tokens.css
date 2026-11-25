@@ -10,6 +10,7 @@
  --c-text:#e8ebdf;--c-text-dim:#a7ae98;--c-text-inv:#10130b;
  /* tipografía */
  --f-ui:ui-monospace,"SF Mono","Cascadia Mono","Courier New",monospace;
+ --f-body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
  --f-display:"Press Start 2P",ui-monospace,monospace;
  --fs-xs:11px;--fs-sm:13px;--fs-md:15px;--fs-lg:18px;--fs-xl:24px;--fs-xxl:34px;
  /* espaciado y forma */

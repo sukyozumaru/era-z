@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Era Z — hoja de contacto de pantallas (herramienta de QA)</title>
+<style>
+body{margin:8px;background:#111;color:#ddd;font:12px system-ui}
+h1{font-size:13px;margin:0 0 6px}
+.g{display:flex;flex-wrap:wrap;gap:8px}
+figure{margin:0}figcaption{font-size:10px;color:#9aa;margin-top:2px}
+iframe{border:1px solid #444;background:#000;display:block}
+</style></head><body>
+<h1 id="t"></h1><div class="g" id="g"></div>
+<script>
+/* Uso: hoja-contacto.html?vp=desktop|land|port&v=new|old&base=/ruta/al/juego/
+   Carga el juego en iframes con el tamaño de pantalla indicado (escalados) y lleva cada uno a una pantalla distinta.
+   Herramienta para las capturas comparativas; no forma parte del juego. */
+const q=new URLSearchParams(location.search),vp=q.get('vp')||'land',v=q.get('v')||'new',base=q.get('base')||'../../';
+const SZ={desktop:[1280,720,.30],land:[812,375,.45],port:[375,812,.40]}[vp];
+/* Los let/const globales del juego no son propiedades de window: se evalúan dentro del iframe con w.eval. */
+const RUN="MD=MODES[0];MI=0;M.seen=1;start();for(let i=0;i<260;i++){P.hp=P.mhp;step(.05)}for(const k in WS)WS[k]=0;WS.flame=3;WS.shot=2;PS.piel=2;P.xp=3;P.hp=P.mhp*.62;";
+const N={
+ titulo:'title()',principal:'typeof UI!=="undefined"?UI.home():lobby()',
+ dificultad:'typeof UI!=="undefined"?UI.go("dificultad"):modes()',personajes:'typeof UI!=="undefined"?UI.go("personajes"):chars()',
+ ajustes:'typeof UI!=="undefined"?UI.go("ajustes"):settings(lobby)',
+ pausa:RUN+'pauseP()',nivel:RUN+'P.xp=P.need;step(.05)',
+ resultado:RUN+'P.hp=0;step(.05)',hud:RUN+'P.mhp=P.hp=1e6;S="play";U.innerHTML=""'
+};
+document.getElementById('t').textContent=`${v==='old'?'ANTES':'DESPUÉS'} · ${vp} ${SZ[0]}×${SZ[1]}`;
+const g=document.getElementById('g');
+/* Refresca la caché HTTP de los recursos del juego (el servidor de desarrollo no manda cabeceras de no-cache) antes de abrir los iframes. */
+fetch(base+'index.html',{cache:'reload'}).then(r=>r.text()).then(h=>Promise.all([...h.matchAll(/(?:src|href)="((?:js|css|assets)\/[^"]+)"/g)].map(m=>fetch(base+m[1],{cache:'reload'})))).then(()=>build());
+function build(){Object.keys(N).forEach((n,i)=>{const f=document.createElement('figure'),fr=document.createElement('iframe');fr.width=SZ[0];fr.height=SZ[1];fr.style.zoom=SZ[2];
+ f.appendChild(fr);const c=document.createElement('figcaption');c.textContent=n;f.appendChild(c);g.appendChild(f);
+ setTimeout(()=>{fr.src=base+'index.html'},i*350);
+ fr.onload=()=>setTimeout(()=>{const w=fr.contentWindow;try{w.eval('M.seen=1;M.set.p=0;'+N[n])}catch(e){c.textContent=n+' ERR '+e.message}},1200)})}
+</script></body></html>

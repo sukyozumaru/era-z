@@ -47,4 +47,4 @@ function draw2D(){X=XL;X.setTransform(.5,0,0,.5,0,0);X.imageSmoothingEnabled=tru
 }
 let last=performance.now();
 function loop(n){const dt=Math.min(.05,(n-last)/1000);last=n;if(S==='play')step(dt);draw();requestAnimationFrame(loop)}
-title();requestAnimationFrame(loop);
+requestAnimationFrame(loop);/* title() se invoca al final de js/20-pantallas.js, cuando ya existe el router */
