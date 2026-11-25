@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Era Z — comparar partidas</title>
+<link rel="stylesheet" href="../../css/tokens.css">
+<style>
+body{margin:0;padding:16px;background:var(--c-bg-0);color:var(--c-text);font:14px/1.4 var(--f-body)}
+h1{font:16px var(--f-display);color:var(--c-warn)}p{color:var(--c-text-dim)}
+table{border-collapse:collapse;width:100%;margin-top:12px;font-variant-numeric:tabular-nums}
+th,td{border:1px solid var(--c-steel-1);padding:4px 6px;text-align:right;white-space:nowrap}th{background:var(--c-bg-2);position:sticky;top:0}td:nth-child(-n+5){text-align:left}
+tr:nth-child(even){background:var(--c-bg-1)}button,input{font:inherit}
+</style></head><body>
+<h1>Era Z · comparar partidas</h1>
+<p>Lee las partidas guardadas en este navegador (<code>localStorage['erazStats']</code>, mismo origen que el juego) o archivos exportados con «Exportar estadísticas». Nada se envía fuera del navegador.</p>
+<button id="local">Cargar partidas de este navegador</button> <input type="file" id="f" accept=".json" multiple>
+<div id="out"></div>
+<script>
+const rows=[];
+function sumW(r){const tot=Object.values(r.w||{}).reduce((a,w)=>a+w.eff,0)||1;return Object.entries(r.w||{}).sort((a,b)=>b[1].eff-a[1].eff).slice(0,3).map(([k,w])=>k+' '+Math.round(100*w.eff/tot)+'%').join(', ')}
+function render(){const h=['fecha','semilla','personaje','modo','resultado','tiempo','nivel','bajas','DPS','recibido','causa de muerte','armas principales'];
+ document.getElementById('out').innerHTML=`<p>${rows.length} partidas</p><table><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>`+rows.map(r=>{const t=Math.max(1,r.t||0),dmg=Object.values(r.w||{}).reduce((a,w)=>a+w.eff,0),rec=Object.values(r.hurt||{}).reduce((a,b)=>a+b,0);
+  return `<tr><td>${(r.date||'').slice(0,16).replace('T',' ')}</td><td>${r.seed}${r.sim?' (sim)':''}</td><td>${r.ch}</td><td>${r.mode}</td><td>${r.res}</td><td>${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}</td><td>${r.lvl}</td><td>${r.bajas}</td><td>${(dmg/t).toFixed(1)}</td><td>${Math.round(rec)}</td><td>${r.muerte?r.muerte.causa+' ('+r.muerte.minuto+' min)':''}</td><td style="text-align:left">${sumW(r)}</td></tr>`}).join('')+'</table>'}
+document.getElementById('local').onclick=()=>{try{rows.push(...JSON.parse(localStorage.getItem('erazStats')||'[]'))}catch(e){}render()};
+document.getElementById('f').onchange=async e=>{for(const f of e.target.files){try{const d=JSON.parse(await f.text());rows.push(...(d.partidas||d))}catch(err){alert('No se pudo leer '+f.name)}}render()};
+</script></body></html>
