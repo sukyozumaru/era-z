@@ -5,8 +5,14 @@
    3. Cambiar el ?v= de index.html (cache busting) en la misma publicación.
    Campos: añadido / mejorado / corregido / conocidos = listas de textos cortos para jugadores. */
 const VERSIONES={
- publicada:'0.1.0-alpha.2',
+ publicada:'0.1.0-alpha.3',
  lista:[
+  {v:'0.1.0-alpha.3',nombre:'Workshop & Combat Insights',fecha:'2026-11-24',
+   fuente:'Publicación alpha.3',
+   añadido:['Estadísticas de combate por partida y exportación en JSON y CSV.','Pantalla de Novedades y versión visible en el inicio.'],
+   mejorado:['Comparativa de perfiles de progresión y herramientas para analizar partidas.'],
+   corregido:['La ruleta del Taller ya no muestra el estado de la partida anterior y conserva el premio al salir.'],
+   conocidos:['La comparativa de perfiles se basa en simulaciones y requiere pruebas humanas.']},
   {v:'0.1.0-alpha.2',nombre:'Mobile, Combat & UX',fecha:'2026-11-24',
    fuente:'Despliegue de GitHub Pages del 25-11-2026 00:57 UTC (24-11-2026 en América), commit 793dbb3',
    añadido:['Interfaz nueva del Puesto 7: menú principal, dificultad, personajes, ajustes por pestañas, pausa, cartas de nivel y pantalla de resultado.',
@@ -34,8 +40,5 @@ const VERSIONES={
   {v:null,nombre:'Maqueta original «Zombie Survivor»',fecha:null,fuente:'Creada por Rencorosito antes de la publicación',
    añadido:['Base del juego: personajes, armas, objetos, reliquias, Taller, misiones, modos Historia, Difícil y Hardcore.'],mejorado:[],corregido:[],conocidos:[]}],
  desarrollo:{v:'0.2.0',nombre:'Combat Balance & Progression Overhaul',
-  items:[['listo','Estadísticas de combate locales y exportables (semilla, daño por arma, causas de muerte).'],
-   ['listo','Corrección de la ruleta del Taller (ERAZ-010).'],
-   ['listo','Pantalla de Novedades y versión bajo el logo.'],
-   ['diseño','Director de dificultad por tiempo: hordas, élites garantizados y minijefes.'],
+  items:[['diseño','Director de dificultad por tiempo: hordas, élites garantizados y minijefes.'],
    ['plan','Rebalanceo de armas, enemigos, recompensas y curva de experiencia.']]}};
