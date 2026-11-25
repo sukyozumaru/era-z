@@ -19,7 +19,7 @@ El juego «funciona bien en general» en su teléfono. Los problemas se agrupan 
 | ERAZ-005 | Balance | Las armas no tienen fortalezas y debilidades claras. | Pendiente (solo propuesta) |
 | ERAZ-006 | UI/UX | Menús, interfaces y pausas resultan confusos. | Pendiente (auditoría y propuesta) |
 | ERAZ-007 | UI/UX | Navegación entre pantallas poco clara. | Pendiente |
-| ERAZ-008 | UI/UX | Falta confirmación al reiniciar o abandonar una partida. | Pendiente |
+| ERAZ-008 | UI/UX | Falta confirmación al reiniciar o abandonar una partida. | Implementado (auto) en `006f669`; pendiente de verificación humana |
 | ERAZ-009 | UI/UX | Identidad visual: se pide estética militar y postapocalíptica del Puesto 7. | Pendiente (propuesta) |
 
 Nota: el contenido de ERAZ-004 a ERAZ-009 está redactado a partir de los requisitos del equipo para la actualización; si Rencorosito dijo algo más específico, hay que añadirlo aquí.
