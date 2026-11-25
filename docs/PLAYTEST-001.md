@@ -12,10 +12,10 @@ El juego «funciona bien en general» en su teléfono. Los problemas se agrupan 
 
 | ID | Área | Comentario registrado | Estado |
 |---|---|---|---|
-| ERAZ-001 | Controles | No se puede usar el dash mientras se mantiene pulsado el joystick (multitouch). Se pide: pointerId independientes, dash en la dirección del movimiento y que el movimiento continúe después del dash. | Pendiente de verificación humana |
-| ERAZ-002 | Armas | El lanzallamas muestra un triángulo visible en vez de fuego. | Pendiente |
-| ERAZ-003 | Armas | «El lanzallamas está mal diseñado» (no se interpreta solo como demasiado fuerte o débil). | Pendiente |
-| ERAZ-004 | Progresión | La progresión por nivel de las armas apenas se nota. | Pendiente |
+| ERAZ-001 | Controles | No se puede usar el dash mientras se mantiene pulsado el joystick (multitouch). Se pide: pointerId independientes, dash en la dirección del movimiento y que el movimiento continúe después del dash. | Implementado (auto) en `5ab6052`; pendiente de verificación humana |
+| ERAZ-002 | Armas | El lanzallamas muestra un triángulo visible en vez de fuego. | Rediseñado (auto) en `1623464`; pendiente de verificación humana |
+| ERAZ-003 | Armas | «El lanzallamas está mal diseñado» (no se interpreta solo como demasiado fuerte o débil). | Auditado y rediseñado (ver `AUDITORIA-LANZALLAMAS.md`); pendiente de verificación humana |
+| ERAZ-004 | Progresión | La progresión por nivel de las armas apenas se nota. | Auditado; correcciones de defectos aplicadas; propuesta en `AUDITORIA-BALANCE.md` |
 | ERAZ-005 | Balance | Las armas no tienen fortalezas y debilidades claras. | Pendiente (solo propuesta) |
 | ERAZ-006 | UI/UX | Menús, interfaces y pausas resultan confusos. | Pendiente (auditoría y propuesta) |
 | ERAZ-007 | UI/UX | Navegación entre pantallas poco clara. | Pendiente |
