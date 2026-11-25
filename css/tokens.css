@@ -1,0 +1,22 @@
+/* Era Z — tokens de diseño (propuesta UI/UX, ERAZ-006..009).
+   Identidad: Puesto 7, militar industrial postapocalíptico. Verdes militares, grises oscuros y amarillo de advertencia.
+   Hoy solo los usan los componentes nuevos (diálogo de confirmación); la interfaz actual se migra por fases. */
+:root{
+ /* color */
+ --c-bg-0:#0f120c;--c-bg-1:#171c12;--c-bg-2:#222a1b;--c-bg-3:#2f3a25;
+ --c-steel-1:#2a2e31;--c-steel-2:#454b50;--c-steel-3:#6b737a;
+ --c-green-1:#3d4d2a;--c-green-2:#5b7340;--c-green-3:#8fa86a;
+ --c-warn:#ffc400;--c-warn-dim:#b88f00;--c-danger:#d9472f;--c-ok:#7fbf5a;--c-info:#5fb4d9;
+ --c-text:#e8ebdf;--c-text-dim:#a7ae98;--c-text-inv:#10130b;
+ /* tipografía */
+ --f-ui:ui-monospace,"SF Mono","Cascadia Mono","Courier New",monospace;
+ --f-display:"Press Start 2P",ui-monospace,monospace;
+ --fs-xs:11px;--fs-sm:13px;--fs-md:15px;--fs-lg:18px;--fs-xl:24px;--fs-xxl:34px;
+ /* espaciado y forma */
+ --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;
+ --r-1:2px;--r-2:4px;--bw:2px;--tap:44px;
+ /* áreas seguras */
+ --safe-t:env(safe-area-inset-top,0px);--safe-r:env(safe-area-inset-right,0px);--safe-b:env(safe-area-inset-bottom,0px);--safe-l:env(safe-area-inset-left,0px);
+ /* elevación y avisos */
+ --shadow-panel:0 10px 40px #000b;--hazard:repeating-linear-gradient(-45deg,var(--c-warn) 0 8px,#111 8px 16px);
+}

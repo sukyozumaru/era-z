@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Era Z — Propuesta UI/UX (maqueta estática, no es el juego)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="../../css/tokens.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:var(--sp-5);background:#0a0c08;color:var(--c-text);font:var(--fs-md)/1.4 var(--f-ui)}
+h1{font:var(--fs-lg)/1.3 var(--f-display);margin:0 0 var(--sp-2);color:var(--c-warn)}
+.note{color:var(--c-text-dim);max-width:880px;margin:0 0 var(--sp-5)}
+.board{display:flex;flex-wrap:wrap;gap:var(--sp-5);align-items:flex-start}
+figure{margin:0}
+figcaption{font:var(--fs-xs) var(--f-display);color:var(--c-text-dim);margin:var(--sp-2) 0 0;line-height:1.6}
+/* marcos de teléfono */
+.ph{position:relative;overflow:hidden;border:3px solid var(--c-steel-2);border-radius:14px;background:linear-gradient(#2b2f22,#3a3024 60%,#2c2118)}
+.land{width:812px;height:375px}.port{width:375px;height:812px}
+.ph{zoom:.55}
+.ph::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#0000 0 3px,#0000000d 3px 4px);pointer-events:none}
+/* componentes */
+.pn{position:absolute;background:var(--c-bg-1);border:var(--bw) solid var(--c-steel-2);border-top:6px solid var(--c-warn);padding:var(--sp-3);box-shadow:var(--shadow-panel)}
+.t{font:var(--fs-sm)/1.4 var(--f-display);color:var(--c-warn);margin:0 0 var(--sp-2);text-transform:uppercase}
+.s{font-size:var(--fs-xs);color:var(--c-text-dim);margin:0 0 var(--sp-2)}
+.btn{display:flex;align-items:center;justify-content:center;gap:var(--sp-2);min-height:var(--tap);width:100%;margin:var(--sp-1) 0;padding:0 var(--sp-3);background:var(--c-bg-3);color:var(--c-text);border:var(--bw) solid var(--c-steel-2);font:var(--fs-sm) var(--f-ui);text-transform:uppercase;letter-spacing:.05em}
+.btn.pri{background:var(--c-warn);color:var(--c-text-inv);border-color:var(--c-warn-dim);font-weight:700}
+.btn.dng{background:#3a1a14;border-color:var(--c-danger);color:#ffb3a5}
+.btn.off{opacity:.45}
+.badge{background:var(--c-danger);color:#fff;border-radius:10px;padding:0 6px;font-size:var(--fs-xs)}
+.card{display:flex;gap:var(--sp-3);align-items:center;min-height:var(--tap);padding:var(--sp-2);margin:var(--sp-1) 0;background:var(--c-bg-2);border:var(--bw) solid var(--c-steel-1)}
+.card.sel{border-color:var(--c-warn);background:var(--c-bg-3)}
+.card.lock{opacity:.5}.card b{font-size:var(--fs-sm)}.card small{display:block;color:var(--c-text-dim);font-size:var(--fs-xs)}
+.ic{width:40px;height:40px;flex:none;display:grid;place-items:center;background:var(--c-bg-0);border:var(--bw) solid var(--c-green-2);font-size:20px}
+.bar{height:10px;background:var(--c-bg-0);border:1px solid var(--c-steel-2);position:relative}.bar i{position:absolute;inset:0 auto 0 0;display:block}
+.hz{height:6px;background:var(--hazard)}
+.tabs{display:flex;gap:2px;margin:0 0 var(--sp-2)}.tabs span{flex:1;text-align:center;padding:10px 0;font-size:var(--fs-xs);background:var(--c-bg-2);color:var(--c-text-dim);text-transform:uppercase;min-height:var(--tap);display:grid;place-items:center}.tabs .on{background:var(--c-green-1);color:var(--c-text);border-bottom:3px solid var(--c-warn)}
+.row{display:flex;gap:var(--sp-2)}.row>*{flex:1}
+.hud{position:absolute;font:var(--fs-sm) var(--f-display);color:var(--c-text)}
+.pill{background:#000a;border:1px solid var(--c-steel-2);padding:4px 8px}
+.dash{position:absolute;right:24px;bottom:24px;width:76px;height:76px;border-radius:50%;border:3px solid var(--c-warn);background:#000a;display:grid;place-items:center;font:9px var(--f-display);color:var(--c-warn)}
+.joy{position:absolute;left:40px;bottom:30px;width:70px;height:70px;border-radius:50%;border:2px solid #fff5}.joy::after{content:"";position:absolute;left:22px;top:22px;width:26px;height:26px;border-radius:50%;background:#fff6}
+.dim{position:absolute;inset:0;background:#000a}
+.warn{position:absolute;left:50%;transform:translateX(-50%);top:62px;font:var(--fs-xs) var(--f-display);color:var(--c-warn);background:#000c;padding:4px 10px;border:1px solid var(--c-warn-dim)}
+.sol{position:absolute;font-size:28px}
+.red{background:radial-gradient(circle,#d9472f66,#d9472f00 70%);position:absolute;width:110px;height:110px;border-radius:50%}
+</style></head><body>
+<h1>Era Z · Propuesta UI/UX · v0.1.0-alpha.2</h1>
+<p class="note">Maqueta estática para decidir dirección visual <b>antes</b> de reemplazar la interfaz. No es el juego ni está conectada al código. Usa los tokens reales de <code>css/tokens.css</code>. Se muestran pantallas en horizontal (812×375 escalado) y vertical (375×812 escalado). Los emojis son marcadores de posición: la iconografía final será un único set coherente.</p>
+<div class="board">
+
+<figure><div class="ph land">
+ <div class="pn" style="left:24px;top:12px;width:300px;bottom:12px">
+  <p class="t">Puesto 7</p><p class="s">Soldado · Común · 120 ¤ · Mejor 4:12</p>
+  <div class="btn pri">▶ Jugar</div>
+  <div class="btn">Personaje: Recluta ›</div>
+  <div class="btn">Misiones <span class="badge">2</span></div>
+  <div class="btn">Taller</div><div class="btn">Ajustes</div>
+ </div>
+ <div class="sol" style="left:540px;top:150px;font-size:90px">🪖</div>
+ <div class="hud pill" style="right:14px;top:14px">ERA Z · 2089</div>
+</div><figcaption>1 · MENÚ PRINCIPAL — una acción primaria (amarillo), estado a la vista, sin párrafos de historia.</figcaption></figure>
+
+<figure><div class="ph land">
+ <div class="pn" style="left:12px;top:12px;right:12px;bottom:12px">
+  <div class="row" style="height:100%"><div style="flex:1.2;overflow:hidden"><p class="t">Personajes</p>
+   <div class="card sel"><div class="ic">🎖️</div><div><b>Recluta</b><small>Común · Sin bonificaciones</small></div></div>
+   <div class="card"><div class="ic">⚕️</div><div><b>Médica de campo</b><small>Común · +30 vida, regenera</small></div></div>
+   <div class="card lock"><div class="ic">🔒</div><div><b>Francotirador</b><small>Derrota a un jefe</small></div></div></div>
+  <div style="flex:1"><p class="t">Detalle</p><p class="s">Recluta</p><div class="bar"><i style="width:60%;background:var(--c-ok)"></i></div><p class="s">Vida</p><div class="bar"><i style="width:40%;background:var(--c-warn)"></i></div><p class="s">Velocidad</p>
+  <p class="s" style="margin-top:12px">Espacio reservado: <b style="color:var(--c-warn)">arma y objeto exclusivos</b> (Survivor Legacy, sin implementar).</p><div class="btn pri" style="margin-top:12px">Seleccionar</div><div class="btn">‹ Volver</div></div></div>
+ </div>
+</div><figcaption>2 · PERSONAJES — lista + detalle; estados: seleccionado (borde amarillo), bloqueado (con condición), hueco para Survivor Legacy.</figcaption></figure>
+
+<figure><div class="ph port">
+ <div class="pn" style="left:20px;right:20px;top:90px">
+  <p class="t">Dificultad</p>
+  <div class="card sel"><div class="ic">📖</div><div><b>Historia</b><small>Sobrevive 10 min y derrota al Mamut Rey</small></div></div>
+  <div class="card lock"><div class="ic">🔒</div><div><b>Difícil</b><small>Completa Historia</small></div></div>
+  <div class="card lock"><div class="ic">🔒</div><div><b>Hardcore</b><small>Completa Difícil</small></div></div>
+  <div class="btn pri" style="margin-top:12px">▶ Comenzar</div><div class="btn">‹ Volver</div>
+  <p class="s" style="margin-top:8px">La historia se muestra solo la primera vez (siempre accesible desde Ajustes).</p>
+ </div>
+</div><figcaption>3 · DIFICULTAD (vertical) — «Comenzar» directo; la intro con máquina de escribir deja de bloquear cada partida.</figcaption></figure>
+
+<figure><div class="ph land" style="background:linear-gradient(#2a3320,#3b3022 55%,#2a2018)">
+ <div class="hud" style="left:24px;top:14px;width:230px"><div class="bar" style="margin-bottom:4px"><i style="width:72%;background:var(--c-danger)"></i></div><div class="bar" style="height:6px"><i style="width:45%;background:var(--c-info)"></i></div><div style="margin-top:4px;font-size:8px">NV 7</div></div>
+ <div class="hud pill" style="left:50%;transform:translateX(-50%);top:14px">04:12</div>
+ <div class="hud pill" style="right:24px;top:14px">Ⅱ</div>
+ <div class="warn">¡PISOTÓN!</div>
+ <div class="red" style="left:420px;top:170px;width:170px;height:170px"></div><div class="sol" style="left:470px;top:210px;font-size:60px">🦣</div><div class="sol" style="left:260px;top:230px;font-size:40px">🪖</div>
+ <div class="hud" style="left:150px;bottom:14px;display:flex;gap:6px"><span class="pill">🔥3</span><span class="pill">💥2</span><span class="pill">🧱1</span></div>
+ <div class="joy"></div><div class="dash">DASH</div>
+</div><figcaption>4 · HUD — vida/XP arriba a la izquierda, tiempo al centro, pausa a la derecha; armas abajo con nivel; avisos de jefe en amarillo; DASH con cooldown (anillo) solo en táctil.</figcaption></figure>
+
+<figure><div class="ph port">
+ <div class="dim"></div>
+ <div class="pn" style="left:20px;right:20px;top:150px">
+  <p class="t">Pausa</p>
+  <div class="btn pri">▶ Continuar</div><div class="btn">Ajustes</div><div class="btn">Reiniciar</div><div class="btn dng">Abandonar partida</div>
+ </div>
+ <div class="pn" style="left:30px;right:30px;top:450px;border-top-color:var(--c-danger)">
+  <p class="t" style="color:var(--c-danger)">¿Abandonar?</p><p class="s">Perderás las monedas de esta partida (<b style="color:var(--c-warn)">+86 ¤</b>).</p>
+  <div class="row"><div class="btn">Cancelar</div><div class="btn dng">Abandonar</div></div>
+ </div>
+</div><figcaption>5 · PAUSA + CONFIRMACIÓN — acciones destructivas separadas y siempre confirmadas, con lo que se pierde.</figcaption></figure>
+
+<figure><div class="ph land">
+ <div class="dim"></div>
+ <div class="pn" style="left:40px;right:40px;top:14px;bottom:14px"><p class="t">Nivel 8 · elige una mejora</p>
+  <div class="row">
+   <div class="card sel" style="flex-direction:column;align-items:flex-start;min-height:150px"><span class="badge" style="background:var(--c-warn);color:#000">1</span><div class="ic">🔥</div><b>Lanzallamas nv.3</b><small>+2° apertura · +12 alcance · más quemadura</small></div>
+   <div class="card" style="flex-direction:column;align-items:flex-start;min-height:150px"><span class="badge" style="background:var(--c-steel-3)">2</span><div class="ic">👟</div><b>Velocidad +10%</b><small>Mejora</small></div>
+   <div class="card" style="flex-direction:column;align-items:flex-start;min-height:150px"><span class="badge" style="background:var(--c-steel-3)">3</span><div class="ic">🧱</div><b>Piel dura nv.2</b><small>Pasiva · −8% daño recibido</small></div>
+  </div></div>
+</div><figcaption>6 · SUBIDA DE NIVEL — tres cartas del mismo tamaño, hotkey visible, el efecto concreto por nivel de cada arma (resuelve «no se nota la progresión»).</figcaption></figure>
+
+<figure><div class="ph port">
+ <div class="pn" style="left:20px;right:20px;top:120px;border-top-color:var(--c-danger)">
+  <p class="t" style="color:var(--c-danger)">Has caído</p>
+  <div class="card"><div><b>Tiempo</b></div><div style="margin-left:auto">06:41</div></div>
+  <div class="card"><div><b>Nivel</b></div><div style="margin-left:auto">11</div></div>
+  <div class="card"><div><b>Bajas</b></div><div style="margin-left:auto">412</div></div>
+  <div class="card"><div><b>Monedas</b></div><div style="margin-left:auto;color:var(--c-warn)">+86 ¤</div></div>
+  <div class="btn pri" style="margin-top:12px">↻ Reintentar</div><div class="btn">Menú principal</div>
+ </div>
+</div><figcaption>7 · DERROTA — resumen de la partida y «Reintentar» a un toque (hoy hay que volver al lobby y pasar 4 pantallas).</figcaption></figure>
+
+<figure><div class="ph land">
+ <div class="pn" style="left:20px;right:20px;top:14px;bottom:14px"><p class="t">Ajustes</p>
+  <div class="tabs"><span class="on">Audio</span><span>Gráficos</span><span>Controles</span><span>Accesibilidad</span></div>
+  <div class="card"><div>Música</div><div class="bar" style="margin-left:auto;width:200px"><i style="width:50%;background:var(--c-green-3)"></i></div></div>
+  <div class="card"><div>Efectos</div><div class="bar" style="margin-left:auto;width:200px"><i style="width:80%;background:var(--c-green-3)"></i></div></div>
+  <div class="btn" style="width:160px">‹ Volver</div></div>
+</div><figcaption>8 · AJUSTES — pestañas (audio, gráficos con perfil móvil, controles, accesibilidad: reducir efectos y cámara).</figcaption></figure>
+
+</div></body></html>

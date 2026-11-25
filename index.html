@@ -9,6 +9,7 @@
 <script>window.addEventListener("error",function(e){var d=document.getElementById("err");if(d){d.style.display="block";d.textContent=(String(e.message).indexOf("THREE")>=0?"No se pudo cargar el motor 3D (Three.js). Revisa tu conexión y recarga.":"Error: "+e.message+" (línea "+e.lineno+")\nRecarga la página. Si sigue, avisa este mensaje.")}});</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/style.css"></head><body>
 <div id="err" style="display:none;position:fixed;inset:0;z-index:99;background:#000e;color:#fff;font:12px monospace;padding:18px;white-space:pre-wrap"></div>
 <div id="wrap"><canvas id="c"></canvas><div id="ui"></div></div>

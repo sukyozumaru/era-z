@@ -25,7 +25,7 @@
 |---|---|---|
 | DPS contra 1 enemigo, nv.1 → nv.5 | 19,5 → 21,9 (+12 %) | 14,9 → 30,7 (+106 %, incluye tiempo de aproximación) |
 | Retroceso que saca al objetivo del alcance | sí | no |
-| DPS a 20 / 30 / 60 FPS | (cono con impactos por frame de caché) | 22,2 / 22,2 / 22,2 |
+| DPS a 20 / 30 / 60 FPS | no medido | 22,2 / 22,2 / 22,2 |
 | Dibujo del efecto | 1 malla por impacto | 1 llamada, pool fijo |
 | Daño en un grupo apretado (25 enemigos), nv.1 / nv.5 | — | 414 / 1130 DPS totales |
 
