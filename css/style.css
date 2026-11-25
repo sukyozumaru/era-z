@@ -109,3 +109,21 @@ input[type=range]{width:100%;height:var(--tap);accent-color:var(--c-warn);margin
 .tabs button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row2 button{min-width:0;padding:0 var(--sp-2);font-size:var(--fs-sm)}
 @media (max-width:430px){.tabs button:not(.on) span{display:none}.tabs button.on{flex:3}}
+
+/* Novedades */
+.pn .ver{margin:-4px 0 var(--sp-3);font:var(--fs-xs) var(--f-body);color:var(--c-text-dim);letter-spacing:.08em}
+.rel{margin:0 0 var(--sp-3);padding:var(--sp-3);background:var(--c-bg-2);border:1px solid var(--c-steel-1);border-left:4px solid var(--c-ok)}
+.rel.dev{background:transparent;border:1px dashed var(--c-warn-dim);border-left:4px dashed var(--c-warn)}
+.rel-h h3{margin:var(--sp-1) 0 0;font:700 var(--fs-md)/1.3 var(--f-body);color:var(--c-text);text-transform:none;letter-spacing:0}
+.rel-h p{margin:2px 0 0;font-size:var(--fs-sm)}
+.rel h3{display:flex;align-items:center;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;font:700 var(--fs-xs)/1.4 var(--f-body);text-transform:uppercase;letter-spacing:.06em}
+.tag.ok{background:var(--c-green-1);color:var(--c-ok)}.tag.dev{background:#3a3000;color:var(--c-warn)}
+ul.chg{margin:0 0 var(--sp-2);padding-left:18px;font-size:var(--fs-sm);line-height:1.45;color:var(--c-text)}ul.chg li{margin:3px 0}
+.st{display:inline-block;margin-right:4px;padding:0 6px;font-size:var(--fs-xs);font-weight:700;border:1px solid var(--c-steel-2);color:var(--c-text-dim)}
+.st-listo{border-color:var(--c-ok);color:var(--c-ok)}.st-diseño{border-color:var(--c-warn-dim);color:var(--c-warn)}
+.pn .src{font-size:var(--fs-xs);color:var(--c-text-dim);margin-top:var(--sp-2)}
+details.old{margin:0 0 var(--sp-2);border:1px solid var(--c-steel-1);background:var(--c-bg-2)}
+details.old summary{min-height:var(--tap);display:flex;align-items:center;padding:0 var(--sp-3);cursor:pointer;font-weight:700;font-size:var(--fs-sm)}
+details.old summary:focus-visible{outline:3px solid var(--c-warn);outline-offset:2px}
+details.old>*:not(summary){padding:0 var(--sp-3)}

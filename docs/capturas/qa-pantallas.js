@@ -10,6 +10,7 @@ window.QA=function(){const out={};const vw=innerWidth,vh=innerHeight;
  title();check('titulo');UI.home();check('principal');UI.go('dificultad');check('dificultad');UI.home();UI.go('personajes');check('personajes');
  UI.home();UI.go('ajustes');check('ajustes-audio');for(const t of['graf','ctrl','acc']){UI.show('ajustes',{tab:t});check('ajustes-'+t)}
  UI.home();UI.go('misiones');check('misiones');UI.home();UI.go('taller');check('taller');UI.home();UI.go('historia',{i:0,then:'back'});check('historia');clearInterval(UI.tw);
+ UI.home();UI.go('novedades');check('novedades');
  eval(R);pauseP();check('pausa');UI.refresh();document.getElementById('p3').click();check('confirmar');UI.refresh();
  eval(R);P.xp=P.need;step(.05);check('nivel');eval(R);pick3();check('cofre');
  eval(R);P.hp=0;step(.05);check('derrota');
