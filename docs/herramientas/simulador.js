@@ -31,7 +31,9 @@ function inTele(x,y){let pen=0;for(const f of FX){if(f.k==='t'){const dx=x-f.x,d
   if(f.sh==='c'&&d<f.r+18)pen+=40;else if(f.sh==='a'&&d<f.r+18&&angDiff(Math.atan2(dy,dx),f.a)<f.arc/2+.3)pen+=40;else if(f.sh==='l'&&segDist(x,y,f)<f.w/2+20)pen+=40}
   else if(f.k==='w'&&!f.hid){const d=Math.hypot(x-f.x,y-f.y);if(Math.abs(d-(f.r+f.v*.25))<22)pen+=25}}return pen}
 function danger(x,y){let s=0;for(const e of E){if(e.dead)continue;const d=Math.hypot(x-e.x,y-e.y)-e.r-10;if(d<220){const w=e.boss?3:e.el?1.8:1;s+=w*(d<=0?60:Math.min(60,900/(d*d+30)))}}
- for(const b of EB){const bx=b.x+b.vx*.25,by=b.y+b.vy*.25,d=Math.hypot(x-bx,y-by);if(d<40)s+=30}return s+inTele(x,y)}
+ for(const b of EB){const d=segD(b.x,b.y,b.x+b.vx*.6,b.y+b.vy*.6,x,y);if(d<34)s+=45*(1-d/34)+10}
+ for(const e of E){if(e.k==='bom'&&!e.dead){const d=Math.hypot(x-e.x,y-e.y);if(d<95)s+=25*(1-d/95)+(e.wu>0?30:0)}}
+ return s+inTele(x,y)}
 function bot(){const sp=P.spd;let best=null,bv=1e18;
  let g=null,gd=1e9;for(const q of G){const d=Math.hypot(q.x-P.x,q.y-P.y);if(d<gd){gd=d;g=q}}
  const heal=OB.find(o=>o.r===0&&P.hp<P.mhp*.6),c=CH[0];
