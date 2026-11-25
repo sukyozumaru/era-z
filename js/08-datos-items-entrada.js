@@ -12,9 +12,9 @@ addEventListener('blur',()=>{keys.w=keys.a=keys.s=keys.d=0;jo=null;jx=jy=0});
 addEventListener('keydown',e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
  if(S==='lvl'&&/^[1-3]$/.test(e.key)){const b=U.querySelectorAll('button.card')[+e.key-1];if(b){e.preventDefault();b.click()}}
  else if(S==='dead'&&e.key==='Enter'){const b=document.getElementById('bk');if(b){e.preventDefault();b.click()}}});
-addEventListener('pointerdown',e=>{INP.touch=e.pointerType!=='mouse';if(e.pointerType==='mouse')return;jo={x:e.clientX,y:e.clientY}});
-addEventListener('pointermove',e=>{if(!jo)return;jx=Math.max(-1,Math.min(1,(e.clientX-jo.x)/50));jy=Math.max(-1,Math.min(1,(e.clientY-jo.y)/50))});
-const up=()=>{jo=null;jx=jy=0};addEventListener('pointerup',up);addEventListener('pointercancel',up);
+addEventListener('pointerdown',e=>{INP.touch=e.pointerType!=='mouse';if(e.pointerType==='mouse'||jo)return;jo={x:e.clientX,y:e.clientY,id:e.pointerId}});
+addEventListener('pointermove',e=>{if(!jo||e.pointerId!==jo.id)return;jx=Math.max(-1,Math.min(1,(e.clientX-jo.x)/50));jy=Math.max(-1,Math.min(1,(e.clientY-jo.y)/50))});
+const up=e=>{if(jo&&e&&e.pointerId!==jo.id)return;jo=null;jx=jy=0};addEventListener('pointerup',up);addEventListener('pointercancel',up);
 
 const RC=['#9aa0a6','#4aa3ff','#b56bff','#ffb800'],RN=['Común','Raro','Épico','Legendario'];
 const hl=n=>P=>{P.mhp+=n;P.hp+=n};
